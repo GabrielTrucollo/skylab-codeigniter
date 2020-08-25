@@ -14,6 +14,9 @@
     <!-- Toaster core JavaScript -->
     <script type="text/javascript" src="<?= base_url('assets/js/toastr.min.js'); ?>"></script>
     <!-- Custom scripts -->
-    <script type="text/javascript" src="<?= base_url('assets/js/maks.js'); ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/js/utils/mask.js'); ?>"></script>
+    <script>
+        new WOW().init();
+    </script>
 </body>
 </html>

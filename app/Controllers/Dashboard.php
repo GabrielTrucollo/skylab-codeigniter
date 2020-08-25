@@ -2,9 +2,6 @@
 
 namespace App\Controllers;
 
-use CodeIgniter\Model;
-use Error;
-
 class Dashboard extends MainController
 {
     /**
@@ -20,8 +17,9 @@ class Dashboard extends MainController
      */
     public function index(): void{
         echo view('includes/header');
-        echo view('includes/notification');
+        echo view('user/login/password-new');
         echo view('includes/footer');
+        echo view('includes/notification');
     }
 
     /**

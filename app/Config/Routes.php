@@ -25,6 +25,15 @@ $routes->setAutoRoute(false);
 
 $routes->get('/', 'Dashboard::index');
 
+
+
+$routes->get('/user/login', 'User::loginIndex');
+$routes->post('/user/login', 'User::loginValidateCpf');
+$routes->get('/user/login/password-required', 'User::loginPassword');
+$routes->post('/user/login/password-required', 'User::loginPassword');
+$routes->get('/user/login/password-new', 'User::loginNewPassword');
+$routes->post('/user/login/password-new', 'User::loginSaveNewPassword');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

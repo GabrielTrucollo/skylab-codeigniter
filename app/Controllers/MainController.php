@@ -10,7 +10,7 @@ abstract class MainController extends BaseController
     /**
      * @var model of a database
      */
-    protected \CodeIgniter\Model $model;
+    protected $model;
 
     /**
      * @var userId
@@ -61,13 +61,13 @@ abstract class MainController extends BaseController
 
     /**
      * Delete register to database
+     * @param $objectId
      */
     public function delete($objectId): void
     {
-
         try {
             // Call method to remove partial's objects
-            $this->deletePartial($objectId);
+            $this->beforeDelete($objectId);
 
             // Call delete model method
             $this->model->delete($objectId);
@@ -81,9 +81,10 @@ abstract class MainController extends BaseController
     }
 
     /**
-     * Delete data to database
+     * Actions beforeDelete object
+     * @param $objectId
      */
-    public function deletePartial($objectId): void
+    public function beforeDelete($objectId): void
     {
     }
 
