@@ -23,8 +23,7 @@ $routes->set404Override();
 $routes->setAutoRoute(false);
 
 
-$routes->get('/', 'Dashboard::index');
-
+$routes->get('/', 'Dashboard::index', ['filter' => 'auth']);
 
 
 $routes->get('/user/login', 'User::loginIndex');

@@ -115,7 +115,7 @@ class User extends MainController
             'logged_in' => true,
         ]);
 
-        return redirect()->to('/');
+        return redirect('/');
     }
 
     /**
@@ -140,7 +140,7 @@ class User extends MainController
             return redirect()->to($this->getIndexRoute());
         }
 
-        if(!$user->password)
+        if($user->password)
         {
             $this->sendUserNotification('error', 'Opção disponível apenas para usuários que não possúem uma senha informada');
             return redirect()->to($this->getIndexRoute());
@@ -162,7 +162,7 @@ class User extends MainController
             'logged_in' => true,
         ]);
 
-        $this->sendUserNotification('sucess', 'Bem vindo, guarde sua senha ela será solicitada nos proximos acessos');
+        $this->sendUserNotification('success', 'Bem vindo, guarde sua senha ela será solicitada nos proximos acessos');
         return redirect()->to('/');
     }
 

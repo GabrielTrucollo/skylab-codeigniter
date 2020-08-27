@@ -17,7 +17,6 @@ class Dashboard extends MainController
      */
     public function index(): void{
         echo view('includes/header');
-        echo view('user/login/password-new');
         echo view('includes/footer');
         echo view('includes/notification');
     }
