@@ -94,7 +94,7 @@ class User extends MainController
     /**
      * Validate doc_cpf and redirect to page of a login
      */
-    public function loginValidatePassword() : \CodeIgniter\HTTP\RedirectResponse
+    public function loginValidatePassword()
     {
         $user = $this->getUserByCpf(session()->get('doc_cpf'));
         if(!$user){
@@ -115,6 +115,7 @@ class User extends MainController
             'logged_in' => true,
         ]);
 
+        $this->sendUserNotification('info', 'Bem vindo, desejamos um ótimo dia!');
         return redirect('/');
     }
 
@@ -134,6 +135,7 @@ class User extends MainController
      */
     public function loginSaveNewPassword()
     {
+        $userModel = new \App\Models\User();
         $user = $this->model->find(session()->get('user_id'));
         if(!$user){
             $this->sendUserNotification('error', 'Nenhum usuário localizado');
@@ -153,8 +155,9 @@ class User extends MainController
         }
 
         $user->password = password_hash($password, PASSWORD_DEFAULT);
-        $this->model->save($user);
+        $userModel->save($user);
 
+        // Set data to session
         session()->set([
             'user_id' => $user->user_id,
             'doc_cpf' => $user->doc_cpf,

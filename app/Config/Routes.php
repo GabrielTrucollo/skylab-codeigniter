@@ -29,7 +29,7 @@ $routes->get('/', 'Dashboard::index', ['filter' => 'auth']);
 $routes->get('/user/login', 'User::loginIndex');
 $routes->post('/user/login', 'User::loginValidateCpf');
 $routes->get('/user/login/password-required', 'User::loginPassword');
-$routes->post('/user/login/password-required', 'User::loginPassword');
+$routes->post('/user/login/password-required', 'User::loginValidatePassword');
 $routes->get('/user/login/password-new', 'User::loginNewPassword');
 $routes->post('/user/login/password-new', 'User::loginSaveNewPassword');
 $routes->get('/user/logOut', 'User::logOut');

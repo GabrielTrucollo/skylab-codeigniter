@@ -27,12 +27,18 @@ class User extends Model
      * @var array
      */
     protected $allowedFields = [
-        'name,
-         doc_cpf,
-         user_image,
-         user_administrator,
-         user_image,
-         email'];
+        'name',
+        'doc_cpf',
+        'user_image',
+        'password',
+        'user_administrator',
+        'email'];
 
     protected $returnType = 'App\Entities\User';
+
+    /**
+     * Indicate if table user default timesatmps
+     * @var bool
+     */
+    protected $useTimestamps = true;
 }
