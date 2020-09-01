@@ -27,11 +27,12 @@ class User extends Model
      * @var array
      */
     protected $allowedFields = [
-        'user_id,
-         name,
+        'name,
          doc_cpf,
          user_image,
          user_administrator,
          user_image,
          email'];
+
+    protected $returnType = 'App\Entities\User';
 }

@@ -9,7 +9,7 @@ class User extends MainController
     public function __construct()
     {
         Parent::__construct();
-        $this->model = new \App\Models\User;
+        $this->model = new \App\Models\User();
     }
 
     /**
@@ -132,9 +132,9 @@ class User extends MainController
     /**
      * Validate doc_cpf and redirect to page of a login
      */
-    public function loginSaveNewPassword() : \CodeIgniter\HTTP\RedirectResponse
+    public function loginSaveNewPassword()
     {
-        $user = $this->getUserByCpf(session()->get('doc_cpf'));
+        $user = $this->model->find(session()->get('user_id'));
         if(!$user){
             $this->sendUserNotification('error', 'Nenhum usuário localizado');
             return redirect()->to($this->getIndexRoute());
@@ -166,12 +166,18 @@ class User extends MainController
         return redirect()->to('/');
     }
 
+    public function logOut(){
+        session()->destroy();
+        return redirect()->to('/');
+    }
+
      /**
      * get user by doc_cpf
      * @param string $cpf cpf of a user
      * @return object
      */
-    private function getUserByCpf(string $cpf) :object{
+    private function getUserByCpf(string $cpf) : \App\Entities\User
+    {
         return $this->model->where('doc_cpf', $cpf)->limit('1')->first();
     }
 }

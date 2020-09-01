@@ -20,4 +20,4 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">
 </head>
 
-<body>
+<body class="black-skin">

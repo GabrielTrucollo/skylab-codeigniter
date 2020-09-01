@@ -32,6 +32,7 @@ $routes->get('/user/login/password-required', 'User::loginPassword');
 $routes->post('/user/login/password-required', 'User::loginPassword');
 $routes->get('/user/login/password-new', 'User::loginNewPassword');
 $routes->post('/user/login/password-new', 'User::loginSaveNewPassword');
+$routes->get('/user/logOut', 'User::logOut');
 
 /**
  * --------------------------------------------------------------------
