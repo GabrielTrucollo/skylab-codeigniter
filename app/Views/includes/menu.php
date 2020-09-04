@@ -1,21 +1,18 @@
-!-- Main Navigation -->
-<header>
 
+<!-- Main Navigation -->
+<header>
     <!-- Sidebar navigation -->
     <div id="slide-out" class="side-nav sn-bg-4 fixed">
         <ul class="custom-scrollbar">
-
             <!-- Logo -->
             <li class="logo-sn waves-effect py-3">
                 <div class="text-center">
                     <a href="#" class="pl-0"><img width="200px" src="<?= base_url('images/logo-total-branca.png') ?>"></a>
                 </div>
             </li>
-
             <!-- Side navigation links -->
             <li>
                 <ul class="collapsible collapsible-accordion">
-
                     <!-- Cadastros -->
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
@@ -29,12 +26,9 @@
                             </ul>
                         </div>
                     </li>
-
-
                 </ul>
             </li>
             <!-- Side navigation links -->
-
         </ul>
         <div class="sidenav-bg mask-strong"></div>
     </div>
@@ -50,7 +44,6 @@
 
         <!-- Breadcrumb -->
         <div class="breadcrumb-dn mr-auto">
-            <p>Menu</p>
         </div>
 
         <!-- Navbar links -->
@@ -65,8 +58,10 @@
             </li>
         </ul>
         <!-- Navbar links -->
-
     </nav>
     <!-- Navbar -->
-
 </header>
+
+<!-- Main layout -->
+<main>
+    <div class="container-fluid">

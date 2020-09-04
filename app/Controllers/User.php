@@ -25,6 +25,18 @@ class User extends MainController
      */
     public function index(): void
     {
+        echo view('includes/header');
+        echo view('includes/menu');
+        echo view('user/index');
+        echo view('includes/footer');
+        echo view('includes/notification');
+    }
+
+    /*
+     * Get all registers
+     */
+    public function getAll(){
+        return json_encode($this->model->select('user_id, doc_cpf, name, user_administrator, email')->findAll());
     }
 
     /**

@@ -1,4 +1,6 @@
 
+    </div>
+    </main>
     <!-- jQuery -->
     <script type="text/javascript" src="<?= base_url('assets/js/jquery.min.js'); ?>"></script>
     <!-- Bootstrap core JavaScript -->
@@ -13,6 +15,8 @@
     <script type="text/javascript" src="<?= base_url('assets/js/toastr.min.js'); ?>"></script>
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="<?= base_url('assets/js/popper.min.js'); ?>"></script>
+    <!-- DataTables -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
     <!-- Custom scripts -->
     <script type="text/javascript" src="<?= base_url('assets/js/utils/mask.js'); ?>"></script>
     <script>
@@ -25,7 +29,11 @@
 
             // SideNav Scrollbar Initialization
             var sideNavScrollbar = document.querySelector('.custom-scrollbar');
-            var ps = new PerfectScrollbar(sideNavScrollbar);
+            var ps = new PerfectScrollbar(sideNavScrollbar, {
+                wheelSpeed: 2,
+                wheelPropagation: true,
+                minScrollbarLength: 20
+            });
         });
     </script>
 </body>

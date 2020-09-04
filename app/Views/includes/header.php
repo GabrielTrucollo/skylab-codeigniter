@@ -16,8 +16,10 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/mdb.min.css'); ?>">
     <!-- Toaster -->
     <link rel="stylesheet" href="<?= base_url('assets/css/toastr.min.css'); ?>">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="<?= base_url('assets/css/addons/datatables.min.css'); ?>">
     <!-- Custom styles -->
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">
 </head>
 
-<body class="black-skin">
+<body class="fixed-sn black-skin">

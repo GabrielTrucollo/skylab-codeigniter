@@ -670,6 +670,16 @@ class Model
 		return $this->insertID;
 	}
 
+    /**
+     * Retuns table name
+     *
+     * @return string
+     */
+	public function getTableName() : string
+    {
+	    return $this->table;
+    }
+
 	//--------------------------------------------------------------------
 
 	/**

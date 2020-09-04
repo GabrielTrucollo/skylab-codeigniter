@@ -22,17 +22,33 @@ $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(false);
 
-
-$routes->get('/', 'Dashboard::index', ['filter' => 'auth']);
-
-
+/**
+ * --------------------------------------------------------------------
+ * Router Login
+ * --------------------------------------------------------------------
+ */
 $routes->get('/user/login', 'User::loginIndex');
 $routes->post('/user/login', 'User::loginValidateCpf');
 $routes->get('/user/login/password-required', 'User::loginPassword');
 $routes->post('/user/login/password-required', 'User::loginValidatePassword');
 $routes->get('/user/login/password-new', 'User::loginNewPassword');
 $routes->post('/user/login/password-new', 'User::loginSaveNewPassword');
-$routes->get('/user/logOut', 'User::logOut');
+
+/**
+ * --------------------------------------------------------------------
+ * Router Dashboard
+ * --------------------------------------------------------------------
+ */
+$routes->get('/', 'Dashboard::index', ['filter' => 'auth']);
+
+/**
+ * --------------------------------------------------------------------
+ * Router User
+ * --------------------------------------------------------------------
+ */
+$routes->get('/user/logOut', 'User::logOut', ['filter' => 'auth']);
+$routes->get('/user/', 'User::index', ['filter' => 'auth']);
+$routes->get('/user/getAll', 'User::getAll', ['filter' => 'auth']);
 
 /**
  * --------------------------------------------------------------------
