@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use CodeIgniter\Model;
+use CodeIgniter\API\ResponseTrait;
 use Error;
 
 abstract class MainController extends BaseController
@@ -36,6 +37,24 @@ abstract class MainController extends BaseController
     abstract public function getIndexRoute(): string;
 
     /**
+     * Get register to database
+     * @param $objectId
+     */
+    public function getById($objectId)
+    {
+        try {
+            $register =  $this->model->find($objectId);
+            if(!register){
+                return $this->failNotFound('Registro {'. $objectId .'} não foi localizado');
+           }
+
+            return json_encode($register);
+        } catch (Error $error) {
+            return $this->failNotFound($error->getMessage());
+        }
+    }
+
+    /**
      * Save data to database
      */
     public function save(): \CodeIgniter\HTTP\RedirectResponse
@@ -66,20 +85,25 @@ abstract class MainController extends BaseController
      * Delete register to database
      * @param $objectId
      */
-    public function delete($objectId): void
+    public function delete($objectId)
     {
         try {
             // Call method to remove partial's objects
             $this->beforeDelete($objectId);
 
+            $register = $this->model->find($objectId);
+            if(!$register){
+                return $this->response->setStatusCode('404')->setBody("Registro { $objectId } não foi localizado");
+            }
+
             // Call delete model method
             $this->model->delete($objectId);
 
             // Send user message
-            $this->sendUserNotification('success', "Registro {$objectId} excluído com sucesso");
+            return $this->response->setStatusCode(200)->setBody('Registro {' . $objectId . '} excluído com sucesso');
         } catch (Error $error) {
             // Send user message
-            $this->sendUserNotification('error', "Ocorreu um erro remover o registro: { $error->getMessage() }");
+            return $this->response->setStatusCode(500)->setBody('Ocorreu um erro remover o registro: {' . $error->getMessage() . '}');
         }
     }
 
@@ -87,7 +111,7 @@ abstract class MainController extends BaseController
      * Actions beforeDelete object
      * @param $objectId
      */
-    public function beforeDelete($objectId): void
+    public function beforeDelete($objectId)
     {
     }
 

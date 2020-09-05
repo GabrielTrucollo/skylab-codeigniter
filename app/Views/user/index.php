@@ -40,7 +40,7 @@
                             <td>
                                 <div class="text-center">
                                 <a type="button" class="btn-floating btn-sm btn-amber" href="<?= base_url('user/new') ?>/"><i class="far fa-edit"></i></a>
-                                <a type="button" class="btn-floating btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+                                <a type="button" id="remove" class="btn-floating btn-sm btn-danger" ng-click="vm.delete(user)"><i class="fas fa-trash"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -104,13 +104,29 @@
     angular.module('users', []);
     angular.module('users').controller('usersController', function($scope ,$http) {
         const vm = this;
-        $http.get('<?= base_url('user/getAll') ?>')
-            .then(function(response){
-                vm.users = response.data;
-            })
-            .catch(function(error){
-                toastr.error(error);
-            });
+
+        vm.getAll = () => {
+            $http.get('<?= base_url('user/getAll') ?>')
+                .then(function(response){
+                    vm.users = response.data;
+                })
+                .catch(function(error){
+                    toastr.error(error);
+                });
+        }
+
+        vm.delete = (register) => {
+            $http.delete('<?= base_url('user') ?>/' + register.user_id)
+                .then(function(response){
+                    toastr.success('Registro excluído com sucesso!');
+                    vm.getAll();
+                })
+                .catch(function(error){
+                    toastr.error(error.data);
+                });
+        }
+
+        vm.getAll();
     });
 </script>
 
