@@ -45,10 +45,13 @@ abstract class MainController extends BaseController
             $this->savePartial();
 
             // Send user message
-            $this->sendUserNotification('sucess', "Registro salvo com sucesso");
+            $this->sendUserNotification('success', "Registro salvo com sucesso");
         } catch (Error $error) {
             // Send user message
-            $this->sendUserNotification('error', "Ocorreu um erro salvar o registro: { $error->getMessage() }");
+            $this->sendUserNotification('error', "Ocorreu um erro salvar o registro: {" . $error->getMessage() . "}");
+        } catch (\ReflectionException $e) {
+            // Send user message
+            $this->sendUserNotification('error', "Ocorreu um erro salvar o registro (Reflection): {" . $e->getMessage() . "}");
         } finally {
             return redirect()->to($this->getIndexRoute());
         }
@@ -57,7 +60,7 @@ abstract class MainController extends BaseController
     /**
      * Save data to database
      */
-    abstract public function savePartial(): void;
+    abstract public function savePartial();
 
     /**
      * Delete register to database
@@ -73,7 +76,7 @@ abstract class MainController extends BaseController
             $this->model->delete($objectId);
 
             // Send user message
-            $this->sendUserNotification('sucess', "Registro {$objectId} excluído com sucesso");
+            $this->sendUserNotification('success', "Registro {$objectId} excluído com sucesso");
         } catch (Error $error) {
             // Send user message
             $this->sendUserNotification('error', "Ocorreu um erro remover o registro: { $error->getMessage() }");
@@ -116,7 +119,7 @@ abstract class MainController extends BaseController
                 break;
 
             default:
-                throw new Error('Type not found');
+                throw new Error('Type {'. $type .'} not found');
         }
     }
 

@@ -25,14 +25,10 @@ class User extends MainController
      */
     public function index(): void
     {
-        echo view('includes/header');
-        echo view('includes/menu');
         echo view('user/index');
-        echo view('includes/footer');
-        echo view('includes/notification');
     }
 
-    /*
+    /**
      * Get all registers
      */
     public function getAll(){
@@ -42,8 +38,14 @@ class User extends MainController
     /**
      * Save data to database
      */
-    public function savePartial(): void
+    public function savePartial()
     {
+        // Instance of a user from post
+        $user = new \App\Entities\User();
+        $user->fill($this->request->getPost());
+
+        // Save data
+        $this->model->save($user);
     }
 
     /**
@@ -51,10 +53,7 @@ class User extends MainController
      */
     public function loginIndex(): void
     {
-        echo view('includes/header');
         echo view('user/login/index');
-        echo view('includes/footer');
-        echo view('includes/notification');
     }
 
     /**
@@ -97,10 +96,7 @@ class User extends MainController
      */
     public function loginPassword(): void
     {
-        echo view('includes/header');
         echo view('user/login/password-required');
-        echo view('includes/footer');
-        echo view('includes/notification');
     }
 
     /**
@@ -136,10 +132,7 @@ class User extends MainController
      */
     public function loginNewPassword(): void
     {
-        echo view('includes/header');
         echo view('user/login/password-new');
-        echo view('includes/footer');
-        echo view('includes/notification');
     }
 
     /**
@@ -147,8 +140,7 @@ class User extends MainController
      */
     public function loginSaveNewPassword()
     {
-        $userModel = new \App\Models\User();
-        $user = $this->model->find(session()->get('user_id'));
+        $user = $this->model->find($this->userId);
         if(!$user){
             $this->sendUserNotification('error', 'Nenhum usuário localizado');
             return redirect()->to($this->getIndexRoute());
@@ -167,7 +159,7 @@ class User extends MainController
         }
 
         $user->password = password_hash($password, PASSWORD_DEFAULT);
-        $userModel->save($user);
+        $this->model->save($user);
 
         // Set data to session
         session()->set([

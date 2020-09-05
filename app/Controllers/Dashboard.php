@@ -16,10 +16,6 @@ class Dashboard extends MainController
      * Show main view
      */
     public function index(): void{
-        echo view('includes/header');
-        echo view('includes/menu');
-        echo view('includes/footer');
-        echo view('includes/notification');
     }
 
     /**

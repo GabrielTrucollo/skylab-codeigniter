@@ -1,4 +1,7 @@
+<?= $this->extend('includes/layout') ?>
 
+<?= $this->section('content') ?>
+<body class="fixed-sn black-skin">
 <!-- Main Navigation -->
 <header>
     <!-- Sidebar navigation -->
@@ -61,7 +64,15 @@
     </nav>
     <!-- Navbar -->
 </header>
-
 <!-- Main layout -->
 <main>
     <div class="container-fluid">
+        <?= $this->renderSection('container') ?>
+    </div>
+</main>
+</body>
+<?= $this->endSection() ?>
+
+
+
+

@@ -1,3 +1,6 @@
+<?= $this->extend('includes/layout') ?>
+
+<?= $this->section('content') ?>
 <link rel="stylesheet" href="<?= base_url('assets/css/login/index.css'); ?>">
 <style>
     .view {
@@ -44,3 +47,4 @@
         </div>
     </section>
 </form>
+<?= $this->endSection() ?>
