@@ -17,6 +17,9 @@ class PersonSoftwareUpdate extends Migration
             'updated_at'       => [
                 'type'           => 'TIMESTAMP',
             ],
+            'person_id'          => [
+                'type'           => 'BIGINT',
+            ],
             'software_id'          => [
                 'type'           => 'BIGINT',
             ],
@@ -30,6 +33,7 @@ class PersonSoftwareUpdate extends Migration
         ]);
         $this->forge->addKey('person_software_update_id', true);
         $this->forge->addForeignKey('software_id','software','software_id');
+        $this->forge->addForeignKey('person_id','person','person_id');
         $this->forge->addForeignKey('user_id','user','user_id');
         $this->forge->createTable('person_software_update');
 	}
