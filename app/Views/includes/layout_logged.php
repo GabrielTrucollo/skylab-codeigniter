@@ -26,6 +26,9 @@
                                 <li>
                                     <a href="<?= base_url('user/') ?>" class="waves-effect"><i class="w-fa fas fa-users"></i> Usuários</a>
                                 </li>
+                                <li>
+                                    <a href="<?= base_url('software/') ?>" class="waves-effect"><i class="w-fa fas fa-desktop"></i> Softwares</a>
+                                </li>
                             </ul>
                         </div>
                     </li>

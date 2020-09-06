@@ -56,7 +56,7 @@ abstract class MainController extends BaseController
     /**
      * Save data to database
      */
-    public function save(): \CodeIgniter\HTTP\RedirectResponse
+    public function save()
     {
         try {
             // Call method to implement save

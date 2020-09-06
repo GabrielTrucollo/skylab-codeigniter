@@ -4,21 +4,21 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class User extends Model
+class Software extends Model
 {
     /**
      * Name of database table
      *
      * @var string
      */
-    protected $table = 'user';
+    protected $table = 'software';
 
     /**
      * The table's primary key.
      *
      * @var string
      */
-    protected $primaryKey = 'user_id';
+    protected $primaryKey = 'software_id';
 
     /**
      * An array of field names that are allowed
@@ -28,13 +28,9 @@ class User extends Model
      */
     protected $allowedFields = [
         'name',
-        'doc_cpf',
-        'user_image',
-        'password',
-        'user_administrator',
-        'email'];
+        'status'];
 
-    protected $returnType = 'App\Entities\User';
+    protected $returnType = 'App\Entities\Software';
 
     /**
      * Indicate if table user default timesatmps

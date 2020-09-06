@@ -55,6 +55,17 @@ $routes->delete('/user/(:num)', 'User::delete/$1');
 
 /**
  * --------------------------------------------------------------------
+ * Router Software
+ * --------------------------------------------------------------------
+ */
+$routes->get('/software/', 'Software::index', ['filter' => 'auth']);
+$routes->get('/software/(:num)', 'Software::getById/$1', ['filter' => 'auth']);
+$routes->get('/software/getAll', 'Software::getAll', ['filter' => 'auth']);
+$routes->post('/software/save', 'Software::save', ['filter' => 'auth']);
+$routes->delete('/software/(:num)', 'Software::delete/$1');
+
+/**
+ * --------------------------------------------------------------------
  * Additional Routing
  * --------------------------------------------------------------------
  *
