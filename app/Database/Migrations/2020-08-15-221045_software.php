@@ -2,12 +2,12 @@
 
 use CodeIgniter\Database\Migration;
 
-class AttendanceReason extends Migration
+class Software extends Migration
 {
 	public function up()
 	{
         $this->forge->addField([
-            'attendance_reason_id'=> [
+            'software_id'          => [
                 'type'           => 'BIGINT',
                 'auto_increment' => true,
             ],
@@ -17,22 +17,22 @@ class AttendanceReason extends Migration
             'updated_at'       => [
                 'type'           => 'TIMESTAMP',
             ],
-            'description'       => [
+            'name'       => [
                 'type'           => 'VARCHAR',
-                'constraint'     => '100',
+                'constraint'     => '50',
             ],
             'disabled' => [
                 'type'           => 'BOOLEAN',
             ]
         ]);
-        $this->forge->addKey('attendance_reason_id', true);
-        $this->forge->createTable('attendance_reason');
+        $this->forge->addKey('software_id', true);
+        $this->forge->createTable('software');
 	}
 
 	//--------------------------------------------------------------------
 
 	public function down()
 	{
-        $this->forge->dropTable('attendance_reason');
+        $this->forge->dropTable('software');
 	}
 }

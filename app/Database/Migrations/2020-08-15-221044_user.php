@@ -25,7 +25,8 @@ class User extends Migration
             ],
             'doc_cpf' => [
                 'type'           => 'VARCHAR',
-                'constraint'     => '14'
+                'constraint'     => '14',
+                'unique' => 'true',
             ],
             'password' => [
                 'type'           => 'TEXT',

@@ -2,12 +2,12 @@
 
 use CodeIgniter\Database\Migration;
 
-class AttendanceScheduling extends Migration
+class PersonSoftwareUpdate extends Migration
 {
 	public function up()
 	{
         $this->forge->addField([
-            'attendance_scheduling_id'=> [
+            'person_software_update_id'          => [
                 'type'           => 'BIGINT',
                 'auto_increment' => true,
             ],
@@ -17,31 +17,27 @@ class AttendanceScheduling extends Migration
             'updated_at'       => [
                 'type'           => 'TIMESTAMP',
             ],
-            'reason'       => [
-                'type'           => 'VARCHAR',
-                'constraint'     => '100',
-                'null'           => true
-            ],
-            'date_visit'       => [
-                'type'           => 'DATE',
-            ],
-            'hour_visit'       => [
-                'type'           => 'VARCHAR',
-                'constraint'     => '5',
-            ],
-            'user_id'=> [
+            'software_id'          => [
                 'type'           => 'BIGINT',
             ],
+            'user_id'          => [
+                'type'           => 'BIGINT',
+            ],
+            'version'       => [
+                'type'           => 'VARCHAR',
+                'constraint'     => '50',
+            ]
         ]);
+        $this->forge->addKey('person_software_update_id', true);
+        $this->forge->addForeignKey('software_id','software','software_id');
         $this->forge->addForeignKey('user_id','user','user_id');
-        $this->forge->addKey('attendance_scheduling_id', true);
-        $this->forge->createTable('attendance_scheduling');
+        $this->forge->createTable('person_software_update');
 	}
 
 	//--------------------------------------------------------------------
 
 	public function down()
 	{
-        $this->forge->dropTable('attendance_scheduling');
+        $this->forge->dropTable('person_software_update');
 	}
 }

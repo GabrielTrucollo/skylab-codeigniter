@@ -43,6 +43,12 @@ class Person extends Migration
             'flag_client' => [
                 'type'           => 'BOOLEAN',
             ],
+            'flag_accounting' => [
+                'type'           => 'BOOLEAN',
+            ],
+            'disabled' => [
+                'type'           => 'BOOLEAN',
+            ],
             'address_street' => [
                 'type'           => 'VARCHAR',
                 'constraint'     => '100',
@@ -77,9 +83,23 @@ class Person extends Migration
                 'type'           => 'VARCHAR',
                 'constraint'     => '50',
                 'null'           => true
+            ],
+            'software_id'       => [
+                'type'           => 'BIGINT',
+            ],
+            'accounting_id'       => [
+                'type'           => 'BIGINT',
+                'null'           => true
+            ],
+            'payment_type_id'       => [
+                'type'           => 'BIGINT',
+                'null'           => true
             ]
         ]);
         $this->forge->addKey('person_id', true);
+        $this->forge->addForeignKey('software_id','software','software_id');
+        $this->forge->addForeignKey('payment_type_id','payment_type','payment_type_id');
+        $this->forge->addForeignKey('accounting_id','person','person_id');
         $this->forge->createTable('person');
 	}
 

@@ -2,12 +2,12 @@
 
 use CodeIgniter\Database\Migration;
 
-class AttendanceType extends Migration
+class PaymentType extends Migration
 {
 	public function up()
 	{
-		$this->forge->addField([
-            'attendance_type_id'=> [
+        $this->forge->addField([
+            'payment_type_id'=> [
                 'type'           => 'BIGINT',
                 'auto_increment' => true,
             ],
@@ -19,17 +19,20 @@ class AttendanceType extends Migration
             ],
             'description'       => [
                 'type'           => 'VARCHAR',
-                'constraint'     => '100',
+                'constraint'     => '50',
+            ],
+            'disabled' => [
+                'type'           => 'BOOLEAN',
             ]
         ]);
-        $this->forge->addKey('attendance_type_id', true);
-        $this->forge->createTable('attendance_type');
+        $this->forge->addKey('payment_type_id', true);
+        $this->forge->createTable('payment_type');
 	}
 
 	//--------------------------------------------------------------------
 
 	public function down()
 	{
-		$this->forge->dropTable('attendance_type');
+        $this->forge->dropTable('payment_type');
 	}
 }
