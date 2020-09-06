@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class AttendanceReason extends MainController
+class AttendanceType extends MainController
 {
     /**
      * MainController constructor.
@@ -10,7 +10,7 @@ class AttendanceReason extends MainController
     public function __construct()
     {
         Parent::__construct();
-        $this->model = new \App\Models\AttendanceReason();
+        $this->model = new \App\Models\AttendanceType();
     }
 
     /**
@@ -18,7 +18,7 @@ class AttendanceReason extends MainController
      */
     public function getIndexRoute(): string
     {
-        return '/attendance-reason/';
+        return '/attendance-type/';
     }
 
     /**
@@ -26,14 +26,14 @@ class AttendanceReason extends MainController
      */
     public function index(): void
     {
-        echo view('attendance_reason/index');
+        echo view('attendance_type/index');
     }
 
     /**
      * Get all registers
      */
     public function getAll(){
-        return json_encode($this->model->select('attendance_reason_id, description, status')->findAll());
+        return json_encode($this->model->select('attendance_type_id, description, status')->findAll());
     }
 
     /**
@@ -42,25 +42,25 @@ class AttendanceReason extends MainController
     public function savePartial()
     {
         // Get user id of a request
-        $reason = $this->request->getVar('attendance_reason_id');
+        $type = $this->request->getVar('attendance_type_id');
 
         // Instance of a user from post
-        switch ($reason){
+        switch ($type){
             case true:
-               $attendanceReason = $this->model->find($reason);
+               $attendanceType = $this->model->find($type);
                 break;
 
             default:
-                $attendanceReason = new \App\Entities\AttendanceReason();
+                $attendanceType = new \App\Entities\AttendanceType();
                 break;
         }
 
-        $attendanceReason->fill([
+        $attendanceType->fill([
             'description' => $this->request->getVar('description'),
             'status' => $this->request->getVar('status')]
         );
 
         // Save data
-        $this->model->save($attendanceReason);
+        $this->model->save($attendanceType);
     }
 }

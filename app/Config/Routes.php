@@ -88,6 +88,17 @@ $routes->delete('/attendance-reason/(:num)', 'AttendanceReason::delete/$1');
 
 /**
  * --------------------------------------------------------------------
+ * Router AttendanceType
+ * --------------------------------------------------------------------
+ */
+$routes->get('/attendance-type/', 'AttendanceType::index', ['filter' => 'auth']);
+$routes->get('/attendance-type/(:num)', 'AttendanceType::getById/$1', ['filter' => 'auth']);
+$routes->get('/attendance-type/getAll', 'AttendanceType::getAll', ['filter' => 'auth']);
+$routes->post('/attendance-type/save', 'AttendanceType::save', ['filter' => 'auth']);
+$routes->delete('/attendance-type/(:num)', 'AttendanceType::delete/$1');
+
+/**
+ * --------------------------------------------------------------------
  * Additional Routing
  * --------------------------------------------------------------------
  *
