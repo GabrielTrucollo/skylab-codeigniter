@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="<?= base_url('assets/css/login/index.css'); ?>">
 <style>
     .view {
-        background: url("<?= base_url('images/nature-backgroud.jpg') ?>")no-repeat center center;
+        background: url("<?= base_url('images/nature-background.jpg') ?>")no-repeat center center;
         background-size: cover;
     }
 </style>

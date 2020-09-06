@@ -27,6 +27,7 @@ class User extends Model
      * @var array
      */
     protected $allowedFields = [
+        'user_id',
         'name',
         'doc_cpf',
         'user_image',

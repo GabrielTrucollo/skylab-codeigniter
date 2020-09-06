@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use CodeIgniter\Model;
-use CodeIgniter\API\ResponseTrait;
 use Error;
 
 abstract class MainController extends BaseController
@@ -44,7 +43,7 @@ abstract class MainController extends BaseController
     {
         try {
             $register =  $this->model->find($objectId);
-            if(!register){
+            if(!$register){
                 return $this->failNotFound('Registro {'. $objectId .'} não foi localizado');
            }
 

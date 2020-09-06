@@ -40,9 +40,26 @@ class User extends MainController
      */
     public function savePartial()
     {
+        // Get user id of a request
+        $userId = $this->request->getVar('user_id');
+
         // Instance of a user from post
-        $user = new \App\Entities\User();
-        $user->fill($this->request->getPost());
+        switch ($userId){
+            case true:
+               $user = $this->model->find($userId);
+                break;
+
+            default:
+                $user = new \App\Entities\User();
+                break;
+        }
+
+        $user->fill([
+            'name' => $this->request->getVar('name'),
+            'doc_cpf' => $this->request->getVar('doc_cpf'),
+            'email' => $this->request->getVar('email'),
+            'user_administrator' => $this->request->getVar('user_administrator')]
+        );
 
         // Save data
         $this->model->save($user);

@@ -13,7 +13,7 @@
                         <input type="text" class="form-control" ng-model="vm.search">
                     </div>
                     <div class="col-sm-2 text-right mt-4">
-                        <a type="button" class="btn-floating btn-info" data-toggle="modal" data-target="#formModal"><i class="fas fa-plus"></i></a>
+                        <a type="button" class="btn-floating btn-info" ng-click="vm.showNewModal()"><i class="fas fa-plus"></i></a>
                     </div>
                 </div>
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -39,7 +39,7 @@
                             </td>
                             <td>
                                 <div class="text-center">
-                                <a type="button" class="btn-floating btn-sm btn-amber" href="<?= base_url('user/new') ?>/"><i class="far fa-edit"></i></a>
+                                <a type="button" class="btn-floating btn-sm btn-amber" ng-click="vm.showEditModal(user)"><i class="far fa-edit"></i></a>
                                 <a type="button" id="remove" class="btn-floating btn-sm btn-danger" ng-click="vm.delete(user)"><i class="fas fa-trash"></i></a>
                                 </div>
                             </td>
@@ -52,11 +52,11 @@
     </section>
 
     <!-- Form modal -->
-    <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-notify modal-info modal-lg" role="document">
+    <div class="modal fade" id="formModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog cascading-modal modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <p class="heading lead">Cadastro de Usuários</p>
+                <div class="modal-header info-color-dark text-white">
+                    <h5 class="heading lead"><i class="fa fa-user"></i> Cadastro de Usuários</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="white-text">&times;</span>
                     </button>
@@ -65,26 +65,35 @@
                 <form method="post" action="<?= base_url('user/save')?>">
                     <div class="modal-body">
                         <div class="row">
+                            <div class="md-form col-sm-4">
+                                <input type="text" id="user_id" name="user_id" class="form-control" readonly value="{{vm.user.user_id}}">
+                                <label for="user_id">Sequencial</label>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="md-form col-sm-12">
-                                <input type="text" id="namer" name="name" maxlength="100" class="form-control" required>
+                                <input type="text" id="name" name="name" maxlength="100" class="form-control" value="{{vm.user.name}}" required>
                                 <label for="name">Nome Completo</label>
                             </div>
                         </div>
                         <div class="row">
                             <div class="md-form col-sm-4">
-                                <input type="text" id="doc_cpf" name="doc_cpf" maxlength="100" class="form-control" required>
+                                <input type="text" id="doc_cpf" name="doc_cpf" maxlength="100" class="form-control" value="{{vm.user.doc_cpf}}" required>
                                 <label for="doc_cpf">CPF</label>
                             </div>
                             <div class="md-form col-sm-4">
                                 <select id="user_administrator" name="user_administrator" class="browser-default custom-select" required>
-                                    <option value="0">Comum</option>
-                                    <option value="1">Administrador</option>
+                                    <option
+                                            ng-repeat="permission in vm.permissions track by permission.value"
+                                            value="{{permission.value}}"
+                                            ng-selected="permission.value == vm.user.user_administrator" >{{permission.description}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="md-form col-sm-12">
-                                <input type="email" id="email" name="email" maxlength="100" class="form-control">
+                                <input type="email" id="email" name="email" maxlength="100" class="form-control" value="{{vm.user.email}}">
                                 <label for="email">E-Mail</label>
                             </div>
                         </div>
@@ -126,7 +135,33 @@
                 });
         }
 
+        vm.showEditModal = (register) => {
+            $http.get('<?= base_url('user') ?>/' + register.user_id)
+                .then(function(response){
+                    vm.user = response.data;
+                })
+                .catch(function(error){
+                    toastr.error(error);
+                });
+
+            $('#formModal').modal('show');
+        }
+
+        vm.showNewModal = () =>{
+            vm.user = [];
+            $('#formModal').modal('show');
+        }
+
+        $(document).on('shown.bs.modal', function (e) {
+            $('#name').focus()
+        })
+
         vm.getAll();
+
+        vm.permissions = [
+            {value: 0, description: 'Comum'},
+            {value: 1, description: 'Administrador'}
+        ];
     });
 </script>
 

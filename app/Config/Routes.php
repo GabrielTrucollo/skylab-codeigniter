@@ -48,6 +48,7 @@ $routes->get('/', 'Dashboard::index', ['filter' => 'auth']);
  */
 $routes->get('/user/logOut', 'User::logOut', ['filter' => 'auth']);
 $routes->get('/user/', 'User::index', ['filter' => 'auth']);
+$routes->get('/user/(:num)', 'User::getById/$1', ['filter' => 'auth']);
 $routes->get('/user/getAll', 'User::getAll', ['filter' => 'auth']);
 $routes->post('/user/save', 'User::save', ['filter' => 'auth']);
 $routes->delete('/user/(:num)', 'User::delete/$1');
