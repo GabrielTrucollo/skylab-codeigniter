@@ -21,8 +21,9 @@ class AttendanceReason extends Migration
                 'type'           => 'VARCHAR',
                 'constraint'     => '100',
             ],
-            'disabled' => [
-                'type'           => 'BOOLEAN',
+            'status' => [
+                'type'           => 'INTEGER',
+                'default'        => '0'
             ]
         ]);
         $this->forge->addKey('attendance_reason_id', true);

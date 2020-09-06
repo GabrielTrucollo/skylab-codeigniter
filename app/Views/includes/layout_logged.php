@@ -35,12 +35,28 @@
                     <!-- Financeiro -->
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">
-                            <i class="w-fa fas fa-money-bill"></i>Financeiro<i class="fas fa-angle-down rotate-icon"></i>
+                            <i class="w-fa fas fa-coins"></i>Financeiro<i class="fas fa-angle-down rotate-icon"></i>
                         </a>
                         <div class="collapsible-body">
                             <ul>
                                 <li>
                                     <a href="<?= base_url('payment-type/') ?>" class="waves-effect"><i class="w-fa fas fa-credit-card"></i> Formas de Pagamento</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- Atendimentos -->
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-clipboard-list"></i>Atendimentos<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li>
+                                    <a href="<?= base_url('attendance-reason/') ?>" class="waves-effect"><i class="w-fa fas fa-book"></i> Motivos</a>
+                                </li>
+                                <li>
+                                    <a href="<?= base_url('attendance-type/') ?>" class="waves-effect"><i class="w-fa fas fa-dolly"></i> Tipos</a>
                                 </li>
                             </ul>
                         </div>

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class PaymentType extends MainController
+class AttendanceReason extends MainController
 {
     /**
      * MainController constructor.
@@ -10,7 +10,7 @@ class PaymentType extends MainController
     public function __construct()
     {
         Parent::__construct();
-        $this->model = new \App\Models\PaymentType();
+        $this->model = new \App\Models\AttendanceReason();
     }
 
     /**
@@ -18,7 +18,7 @@ class PaymentType extends MainController
      */
     public function getIndexRoute(): string
     {
-        return '/payment-type/';
+        return '/attendance-reason/';
     }
 
     /**
@@ -26,14 +26,14 @@ class PaymentType extends MainController
      */
     public function index(): void
     {
-        echo view('payment_type/index');
+        echo view('attendance_reason/index');
     }
 
     /**
      * Get all registers
      */
     public function getAll(){
-        return json_encode($this->model->select('payment_type_id, description, status')->findAll());
+        return json_encode($this->model->select('attendance_reason_id, description, status')->findAll());
     }
 
     /**
@@ -42,25 +42,25 @@ class PaymentType extends MainController
     public function savePartial()
     {
         // Get user id of a request
-        $paymentId = $this->request->getVar('payment_type_id');
+        $reason = $this->request->getVar('attendance_reason_id');
 
         // Instance of a user from post
-        switch ($paymentId){
+        switch ($reason){
             case true:
-               $paymentType = $this->model->find($paymentId);
+               $attendanceReason = $this->model->find($reason);
                 break;
 
             default:
-                $paymentType = new \App\Entities\PaymentType();
+                $attendanceReason = new \App\Entities\PaymentType();
                 break;
         }
 
-        $paymentType->fill([
+        $attendanceReason->fill([
             'description' => $this->request->getVar('description'),
             'status' => $this->request->getVar('status')]
         );
 
         // Save data
-        $this->model->save($paymentType);
+        $this->model->save($attendanceReason);
     }
 }

@@ -77,6 +77,17 @@ $routes->delete('/payment-type/(:num)', 'PaymentType::delete/$1');
 
 /**
  * --------------------------------------------------------------------
+ * Router AttendanceReason
+ * --------------------------------------------------------------------
+ */
+$routes->get('/attendance-reason/', 'AttendanceReason::index', ['filter' => 'auth']);
+$routes->get('/attendance-reason/(:num)', 'AttendanceReason::getById/$1', ['filter' => 'auth']);
+$routes->get('/attendance-reason/getAll', 'AttendanceReason::getAll', ['filter' => 'auth']);
+$routes->post('/attendance-reason/save', 'AttendanceReason::save', ['filter' => 'auth']);
+$routes->delete('/attendance-reason/(:num)', 'AttendanceReason::delete/$1');
+
+/**
+ * --------------------------------------------------------------------
  * Additional Routing
  * --------------------------------------------------------------------
  *

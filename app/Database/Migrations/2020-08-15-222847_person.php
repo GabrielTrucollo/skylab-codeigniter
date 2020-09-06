@@ -17,6 +17,10 @@ class Person extends Migration
             'updated_at'       => [
                 'type'           => 'TIMESTAMP',
             ],
+            'status' => [
+                'type'           => 'INTEGER',
+                'default'        => '0'
+            ],
             'company_name'       => [
                 'type'           => 'VARCHAR',
                 'constraint'     => '100',
@@ -44,9 +48,6 @@ class Person extends Migration
                 'type'           => 'BOOLEAN',
             ],
             'flag_accounting' => [
-                'type'           => 'BOOLEAN',
-            ],
-            'disabled' => [
                 'type'           => 'BOOLEAN',
             ],
             'address_street' => [

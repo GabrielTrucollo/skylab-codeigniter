@@ -21,8 +21,9 @@ class AttendanceType extends Migration
                 'type'           => 'VARCHAR',
                 'constraint'     => '100',
             ],
-            'disabled' => [
-                'type'           => 'BOOLEAN',
+            'status' => [
+                'type'           => 'INTEGER',
+                'default'        => '0'
             ]
         ]);
         $this->forge->addKey('attendance_type_id', true);
