@@ -29,6 +29,16 @@
                                 <li>
                                     <a href="<?= base_url('software/') ?>" class="waves-effect"><i class="w-fa fas fa-desktop"></i> Softwares</a>
                                 </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- Financeiro -->
+                    <li>
+                        <a class="collapsible-header waves-effect arrow-r">
+                            <i class="w-fa fas fa-money-bill"></i>Financeiro<i class="fas fa-angle-down rotate-icon"></i>
+                        </a>
+                        <div class="collapsible-body">
+                            <ul>
                                 <li>
                                     <a href="<?= base_url('payment-type/') ?>" class="waves-effect"><i class="w-fa fas fa-credit-card"></i> Formas de Pagamento</a>
                                 </li>
