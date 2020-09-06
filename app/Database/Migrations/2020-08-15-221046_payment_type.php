@@ -21,8 +21,9 @@ class PaymentType extends Migration
                 'type'           => 'VARCHAR',
                 'constraint'     => '50',
             ],
-            'disabled' => [
-                'type'           => 'BOOLEAN',
+            'status' => [
+                'type'           => 'INTEGER',
+                'default'        => '0'
             ]
         ]);
         $this->forge->addKey('payment_type_id', true);

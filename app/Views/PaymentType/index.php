@@ -1,10 +1,10 @@
 <?= $this->extend('includes/layout_logged') ?>
 
 <?= $this->section('container') ?>
-<div ng-app="software" ng-controller="softwareController as vm">
+<div ng-app="paymentType" ng-controller="paymentTypeController as vm">
     <!-- Section: Basic examples -->
     <section>
-        <h3 class="my-4 dark-grey-text font-weight-bold text-center"><i class="fas fa-desktop"></i> Cadastro de Softwares</h3>
+        <h3 class="my-4 dark-grey-text font-weight-bold text-center"><i class="fas fa-credit-card"></i> Cadastro de Formas de Pagamento</h3>
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -21,24 +21,24 @@
                         <thead>
                             <tr>
                                 <th width="80px">Sequencial</th>
-                                <th>Nome</th>
+                                <th>Descrição</th>
                                 <th width="140px">Status</th>
                                 <th width="120px" class="text-center">Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="software in vm.softwares | filter:vm.search">
-                            <td>{{ software.software_id }}</td>
-                            <td>{{ software.name }}</td>
+                        <tr ng-repeat="paymentType in vm.paymentTypes | filter:vm.search">
+                            <td>{{ paymentType.payment_type_id }}</td>
+                            <td>{{ paymentType.description }}</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-sm m-0" ng-class="software.status == 1 ? 'btn-danger' : 'btn-info'">
-                                    {{ software.status == 1 ? 'Inativo' : 'Ativo' }}
+                                <button type="button" class="btn btn-sm m-0" ng-class="paymentType.status == 1 ? 'btn-danger' : 'btn-info'">
+                                    {{ paymentType.status == 1 ? 'Inativo' : 'Ativo' }}
                                 </button>
                             </td>
                             <td>
                                 <div class="text-center">
-                                <a type="button" class="btn-floating btn-sm btn-amber" ng-click="vm.showEditModal(software)"><i class="far fa-edit"></i></a>
-                                <a type="button" id="remove" class="btn-floating btn-sm btn-danger" ng-click="vm.delete(software)"><i class="fas fa-trash"></i></a>
+                                <a type="button" class="btn-floating btn-sm btn-amber" ng-click="vm.showEditModal(paymentType)"><i class="far fa-edit"></i></a>
+                                <a type="button" id="remove" class="btn-floating btn-sm btn-danger" ng-click="vm.delete(paymentType)"><i class="fas fa-trash"></i></a>
                                 </div>
                             </td>
                         </tr>
@@ -54,33 +54,33 @@
         <div class="modal-dialog cascading-modal modal-lg">
             <div class="modal-content">
                 <div class="modal-header info-color-dark text-white">
-                    <h5 class="heading lead"><i class="fa fa-desktop"></i> Cadastro de Softwares</h5>
+                    <h5 class="heading lead"><i class="fas fa-credit-card"></i> Cadastro de Formas de Pagamento</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true" class="white-text">&times;</span>
                     </button>
                 </div>
 
-                <form method="post" action="<?= base_url('software/save')?>">
+                <form method="post" action="<?= base_url('payment-type/save')?>">
                     <div class="modal-body">
                         <div class="row">
                             <div class="md-form col-sm-4">
-                                <input type="text" id="software_id" name="software_id" class="form-control" readonly value="{{vm.software.software_id}}">
-                                <label for="software_id">Sequencial</label>
+                                <input type="text" id="payment_type_id" name="payment_type_id" class="form-control" readonly value="{{vm.paymentType.payment_type_id}}">
+                                <label for="payment_type_id">Sequencial</label>
                             </div>
                             <div class="col-sm-4">
                                 <select id="status" name="status" class="browser-default custom-select" required>
                                     <option
                                             ng-repeat="status in vm.status track by status.value"
                                             value="{{status.value}}"
-                                            ng-selected="status.value == vm.software.status" >{{status.description}}
+                                            ng-selected="status.value == vm.paymentType.status" >{{status.description}}
                                     </option>
                                 </select>
                             </div>
                         </div>
                         <div class="row">
                             <div class="md-form col-sm-12">
-                                <input type="text" id="name" name="name" maxlength="50" class="form-control" value="{{vm.software.name}}" required>
-                                <label for="name">Nome</label>
+                                <input type="text" id="description" name="description" maxlength="50" class="form-control" value="{{vm.paymentType.description}}" required>
+                                <label for="name">Descrição</label>
                             </div>
                         </div>
                     <div class="modal-footer">
@@ -95,14 +95,14 @@
 <!-- Scripts -->
 <script type="text/javascript" src="<?= base_url('assets/js/angular.min.js'); ?>"></script>
 <script>
-    angular.module('software', []);
-    angular.module('software').controller('softwareController', function($scope ,$http) {
+    angular.module('paymentType', []);
+    angular.module('paymentType').controller('paymentTypeController', function($scope ,$http) {
         const vm = this;
 
         vm.getAll = () => {
-            $http.get('<?= base_url('software/getAll') ?>')
+            $http.get('<?= base_url('payment-type/getAll') ?>')
                 .then(function(response){
-                    vm.softwares = response.data;
+                    vm.paymentTypes = response.data;
                 })
                 .catch(function(error){
                     toastr.error(error);
@@ -110,7 +110,7 @@
         }
 
         vm.delete = (register) => {
-            $http.delete('<?= base_url('software') ?>/' + register.software_id)
+            $http.delete('<?= base_url('payment-type') ?>/' + register.payment_type_id)
                 .then(function(response){
                     toastr.success('Registro excluído com sucesso!');
                     vm.getAll();
@@ -121,9 +121,9 @@
         }
 
         vm.showEditModal = (register) => {
-            $http.get('<?= base_url('software') ?>/' + register.software_id)
+            $http.get('<?= base_url('payment-type') ?>/' + register.payment_type_id)
                 .then(function(response){
-                    vm.software = response.data;
+                    vm.paymentType = response.data;
                 })
                 .catch(function(error){
                     toastr.error(error);
@@ -138,7 +138,7 @@
         }
 
         $(document).on('shown.bs.modal', function (e) {
-            $('#name').focus()
+            $('#description').focus()
         })
 
         vm.getAll();

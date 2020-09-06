@@ -29,6 +29,9 @@
                                 <li>
                                     <a href="<?= base_url('software/') ?>" class="waves-effect"><i class="w-fa fas fa-desktop"></i> Softwares</a>
                                 </li>
+                                <li>
+                                    <a href="<?= base_url('payment-type/') ?>" class="waves-effect"><i class="w-fa fas fa-credit-card"></i> Formas de Pagamento</a>
+                                </li>
                             </ul>
                         </div>
                     </li>

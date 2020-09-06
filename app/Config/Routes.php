@@ -66,6 +66,17 @@ $routes->delete('/software/(:num)', 'Software::delete/$1');
 
 /**
  * --------------------------------------------------------------------
+ * Router Payment-Type
+ * --------------------------------------------------------------------
+ */
+$routes->get('/payment-type/', 'PaymentType::index', ['filter' => 'auth']);
+$routes->get('/payment-type/(:num)', 'PaymentType::getById/$1', ['filter' => 'auth']);
+$routes->get('/payment-type/getAll', 'PaymentType::getAll', ['filter' => 'auth']);
+$routes->post('/payment-type/save', 'PaymentType::save', ['filter' => 'auth']);
+$routes->delete('/payment-type/(:num)', 'PaymentType::delete/$1');
+
+/**
+ * --------------------------------------------------------------------
  * Additional Routing
  * --------------------------------------------------------------------
  *
