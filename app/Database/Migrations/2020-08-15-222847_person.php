@@ -46,9 +46,11 @@ class Person extends Migration
             ],
             'flag_client' => [
                 'type'           => 'BOOLEAN',
+                'default'        => false
             ],
             'flag_accounting' => [
                 'type'           => 'BOOLEAN',
+                'default'        => false
             ],
             'address_street' => [
                 'type'           => 'VARCHAR',
@@ -57,7 +59,7 @@ class Person extends Migration
             ],
             'address_neighborhood' => [
                 'type'           => 'VARCHAR',
-                'constraint'     => '100',
+                'constraint'     => '50',
                 'null'           => true
             ],
             'address_number' => [
@@ -87,6 +89,7 @@ class Person extends Migration
             ],
             'software_id'       => [
                 'type'           => 'BIGINT',
+                'null'           => true
             ],
             'accounting_id'       => [
                 'type'           => 'BIGINT',

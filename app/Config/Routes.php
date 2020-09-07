@@ -99,6 +99,17 @@ $routes->delete('/attendance-type/(:num)', 'AttendanceType::delete/$1');
 
 /**
  * --------------------------------------------------------------------
+ * Router Client
+ * --------------------------------------------------------------------
+ */
+$routes->get('/client/', 'Client::index', ['filter' => 'auth']);
+$routes->get('/client/(:num)', 'Client::getById/$1', ['filter' => 'auth']);
+$routes->get('/client/getAll', 'Client::getAll', ['filter' => 'auth']);
+$routes->post('/client/save', 'Client::save', ['filter' => 'auth']);
+$routes->delete('/client/(:num)', 'Client::delete/$1');
+
+/**
+ * --------------------------------------------------------------------
  * Additional Routing
  * --------------------------------------------------------------------
  *
