@@ -87,7 +87,7 @@
                                             ng-repeat="permission in vm.permissions track by permission.value"
                                             value="{{permission.value}}"
                                             ng-selected="permission.value == vm.user.user_administrator" >{{permission.description}}
-                                    </option>git add
+                                    </option>
                                 </select>
                             </div>
                         </div>

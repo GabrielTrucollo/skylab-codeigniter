@@ -8,6 +8,11 @@ use Error;
 abstract class MainController extends BaseController
 {
     /**
+     * Return value with register is active
+     */
+    protected const REGISTER_ACTIVED = 0;
+
+    /**
      * @var model of a database
      */
     protected $model;

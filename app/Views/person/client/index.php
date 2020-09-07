@@ -114,6 +114,28 @@
                                             <label for="phone_with_ddd">Telefone</label>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <select name="software_id" id="software_id" class="select-wrapper mdb-select colorful-select dropdown-primary md-form">
+                                                <option
+                                                        ng-repeat="software in vm.softwares track by software.software_id"
+                                                        value="{{software.software_id}}"
+                                                        ng-selected="software.software_id == vm.client.software_id" >{{software.name}}
+                                                </option>
+                                            </select>
+                                            <label class="mdb-main-label">Software</label>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <select name="payment_type_id" id="payment_type_id" class="select-wrapper mdb-select colorful-select dropdown-primary md-form">
+                                                <option
+                                                        ng-repeat="payment_type in vm.paymentTypes track by payment_type.payment_type_id"
+                                                        value="{{payment_type.payment_type_id}}"
+                                                        ng-selected="payment_type_id.payment_type_id == vm.client.payment_type_id" >{{payment_type.description}}
+                                                </option>
+                                            </select>
+                                            <label class="mdb-main-label">Forma de Pagamento</label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Endereço -->
@@ -175,10 +197,30 @@
     angular.module('client').controller('clientController', function($scope ,$http) {
         const vm = this;
 
-        vm.getAll = () => {
+        async function getAll (){
             $http.get('<?= base_url('client/getAll') ?>')
                 .then(function(response){
                     vm.clients = response.data;
+                })
+                .catch(function(error){
+                    toastr.error(error);
+                });
+        }
+
+        async function getSoftwares(){
+            $http.get('<?= base_url('software/getAllActive') ?>')
+                .then(function(response){
+                    vm.softwares = response.data;
+                })
+                .catch(function(error){
+                    toastr.error(error);
+                });
+        }
+
+        async function getPaymentTypes(){
+            $http.get('<?= base_url('payment-type/getAllActive') ?>')
+                .then(function(response){
+                    vm.paymentTypes = response.data;
                 })
                 .catch(function(error){
                     toastr.error(error);
@@ -189,7 +231,7 @@
             $http.delete('<?= base_url('client') ?>/' + register.person_id)
                 .then(function(response){
                     toastr.success('Registro excluído com sucesso!');
-                    vm.getAll();
+                    getAll();
                 })
                 .catch(function(error){
                     toastr.error(error.data);
@@ -217,7 +259,9 @@
             $('#doc_cpf_cnpj').focus()
         })
 
-        vm.getAll();
+        getAll();
+        getSoftwares();
+        getPaymentTypes();
 
         vm.status = [
             {value: 0, description: 'Ativo'},

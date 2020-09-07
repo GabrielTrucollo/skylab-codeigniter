@@ -38,6 +38,13 @@ class Software extends MainController
     }
 
     /**
+     * Get all actived registers
+     */
+    public function getAllActive(){
+        return json_encode($this->model->select('software_id, name')->where('status', self::REGISTER_ACTIVED)->findAll());
+    }
+
+    /**
      * Save data to database
      */
     public function savePartial()

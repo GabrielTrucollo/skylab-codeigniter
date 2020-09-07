@@ -61,6 +61,7 @@ $routes->delete('/user/(:num)', 'User::delete/$1');
 $routes->get('/software/', 'Software::index', ['filter' => 'auth']);
 $routes->get('/software/(:num)', 'Software::getById/$1', ['filter' => 'auth']);
 $routes->get('/software/getAll', 'Software::getAll', ['filter' => 'auth']);
+$routes->get('/software/getAllActive', 'Software::getAllActive', ['filter' => 'auth']);
 $routes->post('/software/save', 'Software::save', ['filter' => 'auth']);
 $routes->delete('/software/(:num)', 'Software::delete/$1');
 
@@ -72,6 +73,7 @@ $routes->delete('/software/(:num)', 'Software::delete/$1');
 $routes->get('/payment-type/', 'PaymentType::index', ['filter' => 'auth']);
 $routes->get('/payment-type/(:num)', 'PaymentType::getById/$1', ['filter' => 'auth']);
 $routes->get('/payment-type/getAll', 'PaymentType::getAll', ['filter' => 'auth']);
+$routes->get('/payment-type/getAllActive', 'PaymentType::getAllActive', ['filter' => 'auth']);
 $routes->post('/payment-type/save', 'PaymentType::save', ['filter' => 'auth']);
 $routes->delete('/payment-type/(:num)', 'PaymentType::delete/$1');
 
