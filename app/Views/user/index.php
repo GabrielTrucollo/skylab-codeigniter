@@ -65,19 +65,19 @@
                 <form method="post" action="<?= base_url('user/save')?>">
                     <div class="modal-body">
                         <div class="row">
-                            <div class="md-form col-sm-4">
+                            <div class="md-form col-sm-4 md-outline">
                                 <input type="text" id="user_id" name="user_id" class="form-control" readonly value="{{vm.user.user_id}}">
                                 <label for="user_id">Sequencial</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="md-form col-sm-12">
+                            <div class="md-form col-sm-12 md-outline">
                                 <input type="text" id="name" name="name" maxlength="100" class="form-control" value="{{vm.user.name}}" required>
                                 <label for="name">Nome Completo</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="md-form col-sm-4">
+                            <div class="md-form col-sm-4 md-outline">
                                 <input type="text" id="doc_cpf" name="doc_cpf" maxlength="100" class="form-control" value="{{vm.user.doc_cpf}}" required>
                                 <label for="doc_cpf">CPF</label>
                             </div>
@@ -87,12 +87,12 @@
                                             ng-repeat="permission in vm.permissions track by permission.value"
                                             value="{{permission.value}}"
                                             ng-selected="permission.value == vm.user.user_administrator" >{{permission.description}}
-                                    </option>
+                                    </option>git add
                                 </select>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="md-form col-sm-12">
+                            <div class="md-form col-sm-12 md-outline">
                                 <input type="email" id="email" name="email" maxlength="100" class="form-control" value="{{vm.user.email}}">
                                 <label for="email">E-Mail</label>
                             </div>

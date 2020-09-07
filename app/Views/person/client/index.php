@@ -71,44 +71,45 @@
                             <div class="tab-pane fade in show active" id="dadosGerais" role="tabpanel">
                                 <div class="modal-body mb-1">
                                     <div class="row">
-                                        <div class="md-form col-sm-4">
+                                        <div class="md-form col-sm-4 md-outline">
                                             <input type="text" id="person_id" name="person_id" class="form-control" readonly value="{{vm.client.person_id}}">
                                             <label for="person_id">Sequencial</label>
                                         </div>
                                         <div class="col-sm-4">
-                                            <select id="status" name="status" class="browser-default custom-select" required>
+                                            <select name="status" id="status" class="select-wrapper mdb-select colorful-select dropdown-primary md-form" required>
                                                 <option
                                                         ng-repeat="status in vm.status track by status.value"
                                                         value="{{status.value}}"
                                                         ng-selected="status.value == vm.client.status" >{{status.description}}
                                                 </option>
                                             </select>
+                                            <label class="mdb-main-label">Status</label>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="md-form col-sm-4">
+                                        <div class="md-form col-sm-4 md-outline">
                                             <input type="text" id="doc_cpf_cnpj" name="doc_cpf_cnpj" maxlength="18" class="form-control" value="{{vm.client.doc_cpf_cnpj}}" required>
                                             <label for="doc_cpf_cnpj">CPF/CNPJ</label>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="md-form col-sm-12">
+                                        <div class="md-form col-sm-12 md-outline">
                                             <input type="text" id="company_name" name="company_name" maxlength=100 class="form-control" value="{{vm.client.company_name}}" required>
                                             <label for="company_name">Razão Social</label>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="md-form col-sm-12">
+                                        <div class="md-form col-sm-12 md-outline">
                                             <input type="text" id="fantasy_name" name="fantasy_name" maxlength="100" class="form-control" value="{{vm.client.fantasy_name}}">
                                             <label for="fantasy_name">Nome Fantasia</label>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="md-form col-sm-8">
+                                        <div class="md-form col-sm-8 md-outline">
                                             <input type="email" id="email" name="email" maxlength="100" class="form-control" value="{{vm.client.email}}">
                                             <label for="email">E-mail</label>
                                         </div>
-                                        <div class="md-form col-sm-4">
+                                        <div class="md-form col-sm-4 md-outline">
                                             <input type="text" id="phone_with_ddd" name="phone" class="form-control" value="{{vm.client.phone}}">
                                             <label for="phone_with_ddd">Telefone</label>
                                         </div>
@@ -119,37 +120,37 @@
                             <div class="tab-pane fade" id="endereco" role="tabpanel">
                                 <div class="modal-body">
                                     <div class="row">
-                                        <div class="md-form col-sm-12">
+                                        <div class="md-form col-sm-12 md-outline">
                                             <input type="text" id="address_street" name="address_street" maxlength="100" class="form-control" value="{{vm.client.address_street}}">
                                             <label for="address_street">Rua</label>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="md-form col-sm-4">
+                                        <div class="md-form col-sm-4 md-outline">
                                             <input type="text" id="address_neighborhood" name="address_neighborhood" maxlength="50" xclass="form-control" value="{{vm.client.address_neighborhood}}">
                                             <label for="address_neighborhood">Bairro</label>
                                         </div>
-                                        <div class="md-form col-sm-4">
+                                        <div class="md-form col-sm-4 md-outline">
                                             <input type="text" id="address_number" name="address_number" maxlength="20" xclass="form-control" value="{{vm.client.address_number}}">
                                             <label for="address_number">Número</label>
                                         </div>
-                                        <div class="md-form col-sm-2">
+                                        <div class="md-form col-sm-2 md-outline">
                                             <input type="text" id="address_zipcode" name="address_zipcode" maxlength="10" xclass="form-control" value="{{vm.client.address_zipcode}}">
                                             <label for="address_zipcode">CEP</label>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="md-form col-sm-4">
+                                        <div class="md-form col-sm-4 md-outline">
                                             <input type="text" id="address_city" name="address_city" maxlength="50" class="form-control" value="{{vm.client.address_city}}">
                                             <label for="address_city">Cidade</label>
                                         </div>
-                                        <div class="md-form col-sm-2">
+                                        <div class="md-form col-sm-2 md-outline">
                                             <input type="text" id="address_state" name="address_state" maxlength="2" class="form-control" value="{{vm.client.address_state}}">
                                             <label for="address_state">Estado</label>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="md-form col-sm-12">
+                                        <div class="md-form col-sm-12 md-outline">
                                             <input type="text" id="address_reference" name="address_reference" maxlength="50" class="form-control" value="{{vm.client.address_reference}}">
                                             <label for="address_reference">Complemento</label>
                                         </div>

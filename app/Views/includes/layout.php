@@ -54,6 +54,11 @@
             wheelPropagation: true,
             minScrollbarLength: 20
         });
+
+        // Material Select Initialization
+        $(document).ready(function () {
+            $('.mdb-select').materialSelect();
+        });
     });
 </script>
 <script type="text/javascript">

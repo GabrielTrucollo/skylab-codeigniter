@@ -63,22 +63,23 @@
                 <form method="post" action="<?= base_url('payment-type/save')?>">
                     <div class="modal-body">
                         <div class="row">
-                            <div class="md-form col-sm-4">
+                            <div class="md-form col-sm-4 md-outline">
                                 <input type="text" id="payment_type_id" name="payment_type_id" class="form-control" readonly value="{{vm.paymentType.payment_type_id}}">
                                 <label for="payment_type_id">Sequencial</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="status" name="status" class="browser-default custom-select" required>
+                                <select name="status" id="status" class="select-wrapper mdb-select colorful-select dropdown-primary md-form" required>
                                     <option
                                             ng-repeat="status in vm.status track by status.value"
                                             value="{{status.value}}"
-                                            ng-selected="status.value == vm.paymentType.status" >{{status.description}}
+                                            ng-selected="status.value == vm.client.status" >{{status.description}}
                                     </option>
                                 </select>
+                                <label class="mdb-main-label">Status</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="md-form col-sm-12">
+                            <div class="md-form col-sm-12 md-outline">
                                 <input type="text" id="description" name="description" maxlength="50" class="form-control" value="{{vm.paymentType.description}}" required>
                                 <label for="name">Descrição</label>
                             </div>

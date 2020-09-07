@@ -63,24 +63,25 @@
                 <form method="post" action="<?= base_url('attendance-reason/save')?>">
                     <div class="modal-body">
                         <div class="row">
-                            <div class="md-form col-sm-4">
+                            <div class="md-form col-sm-4 md-outline">
                                 <input type="text" id="attendance_reason_id" name="attendance_reason_id" class="form-control" readonly value="{{vm.attendance_reason.attendance_reason_id}}">
-                                <label for="attendance_reason_id">Sequencial</label>
+                                <label class="active" for="attendance_reason_id">Sequencial</label>
                             </div>
                             <div class="col-sm-4">
-                                <select id="status" name="status" class="browser-default custom-select" required>
+                                <select name="status" id="status" class="select-wrapper mdb-select colorful-select dropdown-primary md-form" required>
                                     <option
                                             ng-repeat="status in vm.status track by status.value"
                                             value="{{status.value}}"
-                                            ng-selected="status.value == vm.attendance_reason.status" >{{status.description}}
+                                            ng-selected="status.value == vm.client.status" >{{status.description}}
                                     </option>
                                 </select>
+                                <label class="mdb-main-label">Status</label>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="md-form col-sm-12">
+                            <div class="md-form col-sm-12 md-outline">
                                 <input type="text" id="description" name="description" maxlength="50" class="form-control" value="{{vm.attendance_reason.description}}" required>
-                                <label for="description">Nome</label>
+                                <label for="description">Descrição</label>
                             </div>
                         </div>
                     <div class="modal-footer">
@@ -138,7 +139,7 @@
         }
 
         $(document).on('shown.bs.modal', function (e) {
-            $('#name').focus()
+            $('#description').focus()
         })
 
         vm.getAll();
