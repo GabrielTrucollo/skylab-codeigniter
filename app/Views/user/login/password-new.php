@@ -1,4 +1,4 @@
-<?= $this->extend('includes/layout') ?>
+<?= $this->extend('includes/layout') ?>software_id
 
 <?= $this->section('content') ?>
 <link rel="stylesheet" href="<?= base_url('assets/css/login/index.css'); ?>">

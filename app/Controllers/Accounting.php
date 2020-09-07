@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Client extends MainController
+class Accounting extends MainController
 {
     /**
      * MainController constructor.
@@ -10,7 +10,7 @@ class Client extends MainController
     public function __construct()
     {
         Parent::__construct();
-        $this->model = new \App\Models\Client();
+        $this->model = new \App\Models\Accounting();
     }
 
     /**
@@ -18,7 +18,7 @@ class Client extends MainController
      */
     public function getIndexRoute(): string
     {
-        return '/client/';
+        return '/accounting/';
     }
 
     /**
@@ -26,7 +26,7 @@ class Client extends MainController
      */
     public function index(): void
     {
-        echo view('person/client/index');
+        echo view('person/accounting/index');
     }
 
     /**
@@ -35,7 +35,19 @@ class Client extends MainController
     public function getAll(){
         return json_encode($this->model
             ->select('person_id, company_name, fantasy_name, doc_cpf_cnpj, phone, email, status')
-            ->where('flag_client', true)
+            ->where('flag_accounting', true)
+            ->findAll());
+    }
+
+
+    /**
+     * Get all actived registers
+     */
+    public function getAllActive(){
+        return json_encode($this->model
+            ->select('person_id, company_name')
+            ->where('flag_accounting', true)
+            ->where('status', self::REGISTER_ACTIVED)
             ->findAll());
     }
 
@@ -54,7 +66,7 @@ class Client extends MainController
                 break;
 
             default:
-                $person = new \App\Entities\Client();
+                $person = new \App\Entities\Accounting();
                 break;
         }
 
@@ -65,7 +77,7 @@ class Client extends MainController
             'doc_cpf_cnpj' => $this->request->getVar('doc_cpf_cnpj'),
             'email' => $this->request->getVar('email'),
             'phone' => $this->request->getVar('phone'),
-            'flag_client' => true,
+            'flag_accounting' => true,
             'address_street' => $this->request->getVar('address_street'),
             'address_neighborhood' => $this->request->getVar('address_neighborhood'),
             'address_number' => $this->request->getVar('address_number'),

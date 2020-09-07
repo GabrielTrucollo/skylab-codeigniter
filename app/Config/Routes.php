@@ -112,6 +112,18 @@ $routes->delete('/client/(:num)', 'Client::delete/$1');
 
 /**
  * --------------------------------------------------------------------
+ * Router Accounting
+ * --------------------------------------------------------------------
+ */
+$routes->get('/accounting/', 'Accounting::index', ['filter' => 'auth']);
+$routes->get('/accounting/(:num)', 'Accounting::getById/$1', ['filter' => 'auth']);
+$routes->get('/accounting/getAll', 'Accounting::getAll', ['filter' => 'auth']);
+$routes->get('/accounting/getAllActive', 'Accounting::getAllActive', ['filter' => 'auth']);
+$routes->post('/accounting/save', 'Accounting::save', ['filter' => 'auth']);
+$routes->delete('/accounting/(:num)', 'Accounting::delete/$1');
+
+/**
+ * --------------------------------------------------------------------
  * Additional Routing
  * --------------------------------------------------------------------
  *

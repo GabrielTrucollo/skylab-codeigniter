@@ -3,7 +3,7 @@
 <?= $this->section('container') ?>
 <div ng-app="client" ng-controller="clientController as vm">
     <section>
-        <h3 class="my-4 dark-grey-text font-weight-bold text-center"><i class="fas fa-address-card"></i> Cadastro de Clientes</h3>
+        <h3 class="my-4 dark-grey-text font-weight-bold text-center"><i class="fas fa-calculator"></i> Cadastro de Contabilidades</h3>
         <div class="card">
             <div class="card-body">
                 <div class="row">
@@ -57,7 +57,7 @@
         <div class="modal-dialog cascading-modal modal-lg">
             <div class="modal-content">
                 <div class="modal-c-tabs">
-                    <form method="post" action="<?= base_url('client/save')?>">
+                    <form method="post" action="<?= base_url('accounting/save')?>">
                         <ul class="nav md-tabs tabs-2 light-blue darken-3" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#dadosGerais" role="tab"><i class="fas fa-address-card mr-1"></i>Dados Gerais</a>
@@ -112,43 +112,6 @@
                                         <div class="md-form col-sm-4 md-outline">
                                             <input type="text" id="phone_with_ddd" name="phone" class="form-control" value="{{vm.client.phone}}">
                                             <label for="phone_with_ddd">Telefone</label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <select name="software_id" id="software_id" class="select-wrapper mdb-select colorful-select dropdown-primary md-form"  searchable="Pesquisar...">
-                                                <option value="" disabled selected>Pesquisa de Softwares</option>
-                                                <option
-                                                        ng-repeat="software in vm.softwares track by software.software_id"
-                                                        value="{{software.software_id}}"
-                                                        ng-selected="software.software_id == vm.client.software_id" >{{software.name}}
-                                                </option>
-                                            </select>
-                                            <label class="mdb-main-label">Software</label>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <select name="payment_type_id" id="payment_type_id" class="select-wrapper mdb-select colorful-select dropdown-primary md-form" searchable="Pesquisar...">
-                                                <option value="" disabled selected>Pesquisa de Formas de Pagamento</option>
-                                                <option
-                                                        ng-repeat="payment_type in vm.paymentTypes track by payment_type.payment_type_id"
-                                                        value="{{payment_type.payment_type_id}}"
-                                                        ng-selected="payment_type.payment_type_id == vm.client.payment_type_id" >{{payment_type.description}}
-                                                </option>
-                                            </select>
-                                            <label class="mdb-main-label">Forma de Pagamento</label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12">
-                                            <select name="accounting_id" id="accounting_id" class="select-wrapper mdb-select colorful-select dropdown-primary md-form" searchable="Pesquisar...">
-                                                <option value="" disabled selected>Pesquisa de Contabilidades</option>
-                                                <option
-                                                        ng-repeat="accounting in vm.accountings track by accounting.person_id"
-                                                        value="{{accounting.person_id}}"
-                                                        ng-selected="accounting.person_id == vm.client.accounting_id" >{{accounting.company_name}}
-                                                </option>
-                                            </select>
-                                            <label class="mdb-main-label">Contabilidade</label>
                                         </div>
                                     </div>
                                 </div>
@@ -212,8 +175,8 @@
     angular.module('client').controller('clientController', function($scope ,$http) {
         const vm = this;
 
-        function getAll (){
-            $http.get('<?= base_url('client/getAll') ?>')
+        async function getAll (){
+            $http.get('<?= base_url('accounting/getAll') ?>')
                 .then(function(response){
                     vm.clients = response.data;
                 })
@@ -222,38 +185,10 @@
                 });
         }
 
-        function getSoftwares(){
-            $http.get('<?= base_url('software/getAllActive') ?>')
-                .then(function(response){
-                    vm.softwares = response.data;
-                })
-                .catch(function(error){
-                    toastr.error(error);
-                });
-        }
-
-        function getPaymentTypes(){
-            $http.get('<?= base_url('payment-type/getAllActive') ?>')
-                .then(function(response){
-                    vm.paymentTypes = response.data;
-                })
-                .catch(function(error){
-                    toastr.error(error);
-                });
-        }
-
-        function getAccountings(){
-            $http.get('<?= base_url('accounting/getAllActive') ?>')
-                .then(function(response){
-                    vm.accountings = response.data;
-                })
-                .catch(function(error){
-                    toastr.error(error);
-                });
-        }
+        getAll();
 
         vm.delete = (register) => {
-            $http.delete('<?= base_url('client') ?>/' + register.person_id)
+            $http.delete('<?= base_url('accounting') ?>/' + register.person_id)
                 .then(function(response){
                     toastr.success('Registro excluído com sucesso!');
                     getAll();
@@ -264,7 +199,7 @@
         }
 
         vm.showEditModal = (register) => {
-            $http.get('<?= base_url('client') ?>/' + register.person_id)
+            $http.get('<?= base_url('accounting') ?>/' + register.person_id)
                 .then(function(response){
                     vm.client = response.data;
                 })
@@ -283,11 +218,6 @@
         $(document).on('shown.bs.modal', function (e) {
             $('#doc_cpf_cnpj').focus()
         })
-
-        getSoftwares();
-        getPaymentTypes();
-        getAccountings();
-        getAll();
 
         vm.status = [
             {value: 0, description: 'Ativo'},
