@@ -2,12 +2,12 @@
 
 use CodeIgniter\Database\Migration;
 
-class Attendance extends Migration
+class AttendanceEvent extends Migration
 {
 	public function up()
 	{
         $this->forge->addField([
-            'attendance_id'=> [
+            'attendance_event_id'=> [
                 'type'           => 'BIGINT',
                 'auto_increment' => true,
             ],
@@ -17,45 +17,41 @@ class Attendance extends Migration
             'updated_at'       => [
                 'type'           => 'TIMESTAMP',
             ],
-            'start_date'       => [
-                'type'           => 'TIMESTAMP',
-                'null'           => true
-            ],
             'end_date'       => [
                 'type'           => 'TIMESTAMP',
                 'null'           => true
             ],
+            'situation'       => [
+                'type'           => 'INTEGER',
+            ],
             'description'       => [
                 'type'           => 'TEXT',
-            ],
-            'person_id'       => [
-                'type'           => 'BIGINT',
             ],
             'user_id'       => [
                 'type'           => 'BIGINT',
                 'null'           => true
             ],
-            'attendance_reason_id'       => [
-                'type'           => 'BIGINT',
-            ],
-            'attendance_scheduling_id'       => [
+            'attendance_id'       => [
                 'type'           => 'BIGINT',
                 'null'           => true
-            ]
+            ],
+            'attendance_type_id'       => [
+                'type'           => 'BIGINT',
+                'null'           => true
+            ],
         ]);
 
-        $this->forge->addForeignKey('person_id','person','person_id');
         $this->forge->addForeignKey('user_id','user','user_id');
-        $this->forge->addForeignKey('attendance_reason_id','attendance_reason','attendance_reason_id');
-        $this->forge->addForeignKey('attendance_scheduling_id','attendance_scheduling','attendance_scheduling_id');
-        $this->forge->addKey('attendance_id', true);
-        $this->forge->createTable('attendance');
+        $this->forge->addForeignKey('attendance_id','attendance','attendance_id');
+        $this->forge->addForeignKey('attendance_type_id','attendance_type','attendance_type_id');
+        $this->forge->addKey('attendance_event_id', true);
+        $this->forge->createTable('attendance_event');
 	}
 
 	//--------------------------------------------------------------------
 
 	public function down()
 	{
-        $this->forge->dropTable('attendance');
+        $this->forge->dropTable('attendance_event');
 	}
 }

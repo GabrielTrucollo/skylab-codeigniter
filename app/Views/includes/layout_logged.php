@@ -64,6 +64,9 @@
                                 <li>
                                     <a href="<?= base_url('attendance-type/') ?>" class="waves-effect"><i class="w-fa fas fa-dolly"></i> Tipos</a>
                                 </li>
+                                <li>
+                                    <a href="<?= base_url('attendance/') ?>" class="waves-effect"><i class="w-fa fas fa-headset"></i> Lançamentos</a>
+                                </li>
                             </ul>
                         </div>
                     </li>

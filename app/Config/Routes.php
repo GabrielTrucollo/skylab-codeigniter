@@ -124,6 +124,17 @@ $routes->delete('/accounting/(:num)', 'Accounting::delete/$1');
 
 /**
  * --------------------------------------------------------------------
+ * Router Attendance
+ * --------------------------------------------------------------------
+ */
+$routes->get('/attendance/', 'Attendance::index', ['filter' => 'auth']);
+$routes->get('/attendance/(:num)', 'Attendance::getById/$1', ['filter' => 'auth']);
+$routes->get('/attendance/getAll', 'Attendance::getAll', ['filter' => 'auth']);
+$routes->post('/attendance/save', 'Attendance::save', ['filter' => 'auth']);
+$routes->delete('/attendance/(:num)', 'Attendance::delete/$1');
+
+/**
+ * --------------------------------------------------------------------
  * Additional Routing
  * --------------------------------------------------------------------
  *
