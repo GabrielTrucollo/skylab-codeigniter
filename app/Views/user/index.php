@@ -4,7 +4,7 @@
 <div ng-app="users" ng-controller="usersController as vm">
     <!-- Section: Basic examples -->
     <section>
-        <h3 class="my-4 dark-grey-text font-weight-bold text-center"><i class="fas fa-user"></i> Cadastro de Usuários</h3>
+        <h3 class="dark-grey-text font-weight-bold text-center"><i class="fas fa-user"></i> Cadastro de Usuários</h3>
         <div class="card">
             <div class="card-body">
                 <div class="row">

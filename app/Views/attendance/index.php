@@ -4,7 +4,7 @@
     <div ng-app="attendance" ng-controller="attendanceController as vm">
 
         <section>
-            <h3 class="my-4 dark-grey-text font-weight-bold text-center"><i class="fas fa-headset"></i> Atendimentos</h3>
+            <h3 class="dark-grey-text font-weight-bold text-center"><i class="fas fa-headset"></i> Atendimentos</h3>
             <div class="card">
                 <div class="card-body">
                     <div class="row">
@@ -54,8 +54,7 @@
                                 </td>
                             </tr>
                                 <tr ng-repeat-end class="hide-table-padding">
-                                    <td></td>
-                                    <td colspan="4">
+                                    <td colspan="10">
                                         <div id="attendance{{attendance.attendance_id}}" class="collapse in p-3">
                                             <div class="row">
                                                 <div class="col-4 text-primary"><b>Usuário</b></div>
@@ -82,7 +81,6 @@
                 </div>
             </div>
         </section>
-
     </div>
     <!-- Scripts -->
     <script type="text/javascript" src="<?= base_url('assets/js/angular.min.js'); ?>"></script>

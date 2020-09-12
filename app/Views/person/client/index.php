@@ -3,7 +3,7 @@
 <?= $this->section('container') ?>
 <div ng-app="client" ng-controller="clientController as vm">
     <section>
-        <h3 class="my-4 dark-grey-text font-weight-bold text-center"><i class="fas fa-address-card"></i> Cadastro de Clientes</h3>
+        <h3 class="dark-grey-text font-weight-bold text-center"><i class="fas fa-address-card"></i> Cadastro de Clientes</h3>
         <div class="card">
             <div class="card-body">
                 <div class="row">

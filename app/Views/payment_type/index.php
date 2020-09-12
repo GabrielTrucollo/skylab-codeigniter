@@ -4,7 +4,7 @@
 <div ng-app="paymentType" ng-controller="paymentTypeController as vm">
     <!-- Section: Basic examples -->
     <section>
-        <h3 class="my-4 dark-grey-text font-weight-bold text-center"><i class="fas fa-credit-card"></i> Cadastro de Formas de Pagamento</h3>
+        <h3 class="dark-grey-text font-weight-bold text-center"><i class="fas fa-credit-card"></i> Cadastro de Formas de Pagamento</h3>
         <div class="card">
             <div class="card-body">
                 <div class="row">
