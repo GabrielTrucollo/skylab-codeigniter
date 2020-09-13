@@ -290,6 +290,17 @@
                 $('#formModal').modal('show');
             }
 
+            vm.delete = (register) => {
+                $http.delete('<?= base_url('attendance') ?>/' + register.attendance_id)
+                    .then(function(response){
+                        toastr.success('Registro excluído com sucesso!');
+                        vm.getAll();
+                    })
+                    .catch(function(error){
+                        toastr.error(error.data);
+                    });
+            }
+
             vm.situation = [
                 {value: 0, description: 'Em Espera'},
                 {value: 1, description: 'Em Atendimento'},
