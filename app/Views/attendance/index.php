@@ -35,7 +35,7 @@
                                 id="attendances"
                                 data-toggle="collapse"
                                 data-parent="#attendances"
-                                href="#attendance1"
+                                href="#attendance{{attendance.attendance_id}}"
                             >
                                 <td class="expand-button" hidden></td>
                                 <td>{{ attendance.attendance_id }}</td>
