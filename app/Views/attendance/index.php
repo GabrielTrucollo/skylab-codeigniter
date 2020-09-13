@@ -24,7 +24,7 @@
                                 <th width="80px">Sequencial</th>
                                 <th>Cliente</th>
                                 <th width="140px">Telefone</th>
-                                <th width="170px" class="text-center">Status</th>
+                                <th width="190px" class="text-center">Status</th>
                                 <th width="120px" class="text-center">Ações</th>
                             </tr>
                             </thead>
@@ -42,8 +42,8 @@
                                 <td>{{ attendance.person_company_name }}</td>
                                 <td>{{ attendance.person_phone }}</td>
                                 <td class="text-center">
-                                    <button type="button" class="btn btn-sm m-0" ng-class="vm.getClassSituation(attendance)">
-                                        {{ vm.getDescriptionSituation(attendance) }}
+                                    <button type="button" class="btn btn-sm m-0" ng-class="vm.getClassSituation(attendance.attendance_event)">
+                                        {{ vm.getDescriptionSituation(attendance.attendance_event) }}
                                     </button>
                                 </td>
                                 <td>
@@ -62,15 +62,15 @@
                                             <div class="col-2 text-dark"><b>Data</b></div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-4 text-primary">{{attendance.event_user_name}}</div>
+                                            <div class="col-4 text-primary">{{attendance.attendance_event.user}}</div>
                                             <div class="col-6 text-danger">{{attendance.report}}</div>
-                                            <div class="col-2 text-dark"><b>{{ vm.getFormatDate(attendance)}}</b></div>
+                                            <div class="col-2 text-dark"><b>{{ vm.getFormatDate(attendance.start_date)}}</b></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-12 text-dark"><b>Descrição</b></div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-12 text-dark">{{attendance.event_description}}</div>
+                                            <div class="col-12 text-dark">{{attendance.attendance_event.description}}</div>
                                         </div>
                                     </div>
                                 </td>
@@ -153,6 +153,9 @@
                                 <!-- Eventos -->
                                 <div class="tab-pane fade" id="eventos" role="tabpanel">
                                     <div class="modal-body">
+                                        <div class="col-s2 text-right">
+                                            <a type="button" class="btn-floating btn-info" ng-click="vm.showNewEventModal(vm.attendance)"><i class="fas fa-plus"></i></a>
+                                        </div>
                                         <div class="table-responsive">
                                             <div class="table-wrapper-scroll-y my-custom-scrollbar">
                                                 <table id="main-table" class="table table-hover table-striped table-bordered" cellspacing="0">
@@ -175,7 +178,7 @@
                                                             </td>
                                                             <td>
                                                                 <div class="text-center">
-                                                                    <a type="button" class="btn-floating btn-sm btn-amber" ng-click="vm.showEditModalEvent(attendanceEvent)"><i class="far fa-edit"></i></a>
+                                                                    <a type="button" class="btn-floating btn-sm btn-amber" ng-click="vm.showEditEventModal(attendanceEvent)"><i class="far fa-edit"></i></a>
                                                                     <a type="button" id="remove" class="btn-floating btn-sm btn-danger" ng-click="vm.deleteEvent(attendanceEvent)"><i class="fas fa-trash"></i></a>
                                                                 </div>
                                                             </td>
@@ -197,6 +200,73 @@
             </div>
         </div>
 
+        <!-- Form event modal -->
+        <div class="modal fade" id="formEventModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog cascading-modal modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header info-color-dark text-white">
+                        <h5 class="heading lead"><i class="fas fa-clipboard-list"></i> Lançamento de Evento</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="white-text">&times;</span>
+                        </button>
+                    </div>
+                    <form method="post" action="<?= base_url('attendance-event/save')?>">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="md-form col-sm-4 md-outline">
+                                    <input type="text" id="attendance_event_id" name="attendance_event_id" class="form-control" readonly value="{{vm.attendanceEvent.attendance_event_id}}">
+                                    <label class="active" for="attendance_event_id">Sequencial</label>
+                                    <input type="text" id="attendance_id_event" name="attendance_id" class="form-control" readonly hidden value="{{vm.attendanceEvent.attendance_id}}">
+                                </div>
+                                <div class="md-form col-sm-4 md-outline">
+                                    <input type="text" id="date1" name="start_date" class="form-control" value="{{vm.attendanceEvent.start_date}}" required>
+                                    <label for="start_date">Data</label>
+                                </div>
+                                <div class="md-form col-sm-2 md-outline">
+                                    <input type="text" id="time1" name="start_time" class="form-control" value="{{vm.attendanceEvent.start_time}}" required>
+                                    <label for="start_date">Hora</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <select name="situation" id="situation" class="select-wrapper mdb-select colorful-select dropdown-primary md-form" searchable="Pesquisar..." required>
+                                        <option
+                                                ng-repeat="situation in vm.situation track by situation.value"
+                                                value="{{situation.value}}"
+                                                ng-selected="situation.value == vm.attendanceReason.situation" >{{situation.description}}
+                                        </option>
+                                    </select>
+                                    <label class="mdb-main-label">Status</label>
+                                </div>
+                                <div class="col-sm-6">
+                                    <select name="attendance_type_id" id="attendance_type_id" class="select-wrapper mdb-select colorful-select dropdown-primary md-form" searchable="Pesquisar..." required>
+                                        <option
+                                                ng-repeat="attendanceType in vm.attendancesType track by attendanceType.attendance_type_id"
+                                                value="{{attendanceType.attendance_type_id}}"
+                                                ng-selected="attendanceType.attendance_type_id == vm.attendanceReason.attendance_type_id" >{{attendanceType.description}}
+                                        </option>
+                                    </select>
+                                    <label class="mdb-main-label">Tipo</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="md-form md-outline">
+                                        <textarea type="text" id="description_event" name="description" class="md-textarea form-control" rows="3" cols="3" required>{{vm.attendanceEvent.description}}</textarea>
+                                        <label for="description_event">Descrição</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-info">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </div>
     <!-- Scripts -->
     <script type="text/javascript" src="<?= base_url('assets/js/angular.min.js'); ?>"></script>
@@ -206,11 +276,7 @@
             const vm = this;
 
             vm.getClassSituation = (attendance) => {
-                switch (attendance.situation){
-                    case null:
-                    case '0':
-                        return 'btn-danger';
-
+                switch (attendance?.situation){
                     case '1':
                         return 'btn-success';
 
@@ -219,21 +285,30 @@
 
                     case '99':
                         return 'btn-primary';
+
+                    case null:
+                    case '0':
+                    default:
+                        return 'btn-danger';
                 }
             }
 
-            vm.getFormatDate = (attendance) => {
-                return moment(attendance.event_created_at).format('DD/MM/yyyy');
+            vm.getFormatDate = (date) => {
+                if(!date){
+                    return 'Sem Eventos';
+                }
+
+                return moment(date).format('DD/MM/yyyy');
             }
 
             vm.getDescriptionSituation = (attendance) => {
-                let situation = vm.situation.find(x => x.value == attendance.situation);
-                switch (situation){
+                var situation = vm.situation.find(x => x.value == attendance?.situation);
+                switch (!situation){
                     case true:
-                        return situation.description;
+                        return 'Em Espera';
 
                     default:
-                        return 'Em Espera';
+                        return situation.description;
                 }
             }
 
@@ -241,6 +316,16 @@
                 $http.get('<?= base_url('client/getAllActive') ?>')
                     .then(function(response){
                         vm.clients = response.data;
+                    })
+                    .catch(function(error){
+                        toastr.error(error);
+                    });
+            }
+
+            vm.getAttendancesType = () => {
+                $http.get('<?= base_url('attendance-type/getAllActive') ?>')
+                    .then(function(response){
+                        vm.attendancesType = response.data;
                     })
                     .catch(function(error){
                         toastr.error(error);
@@ -277,16 +362,44 @@
                         toastr.error(error);
                     });
 
+                vm.getAttendancesReason();
+                vm.getClients();
                 $('#formModal').modal('show');
             }
 
-            vm.showNewModal = () =>{
+            vm.showNewEventModal = (register)  => {
+                vm.attendanceEvent =
+                    {
+                        attendance_id: register.attendance_id,
+                        start_date: moment(new Date()).format('DD/MM/yyyy'),
+                        start_time: moment(new Date()).format('HH:mm'),
+                    };
+
+                $('#formEventModal').modal('show');
+            }
+
+            vm.showEditEventModal = (register) => {
+                $http.get('<?= base_url('attendance-event') ?>/' + register.attendance_event_id)
+                    .then(function(response){
+                        vm.attendanceEvent = response.data;
+                        vm.attendanceEvent.start_date = moment(vm.attendanceEvent.start_date).format('DD/MM/yyyy');
+                    })
+                    .catch(function(error){
+                        toastr.error(error);
+                    });
+
+                $('#formEventModal').modal('show');
+            }
+
+            vm.showNewModal = () => {
                 vm.attendance =
                     {
                         start_date: moment(new Date()).format('DD/MM/yyyy'),
                         start_time: moment(new Date()).format('HH:mm')
                     };
 
+                vm.getClients();
+                vm.getAttendancesReason();
                 $('#formModal').modal('show');
             }
 
@@ -308,8 +421,7 @@
                 {value: 99, description: 'Concluído'}
             ];
 
-            vm.getClients();
-            vm.getAttendancesReason();
+            vm.getAttendancesType();
             vm.getAll();
         });
     </script>

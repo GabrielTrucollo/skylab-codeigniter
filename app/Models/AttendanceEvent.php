@@ -27,6 +27,8 @@ class AttendanceEvent extends Model
      * @var array
      */
     protected $allowedFields = [
+        'start_date',
+        'start_time',
         'end_date',
         'end_time',
         'situation',

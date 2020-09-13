@@ -39,26 +39,25 @@ class Attendance extends MainController
      * Get all registers
      */
     public function getAll(){
-        return json_encode($this->model
+        $attendanceList = $this->model
             ->select('
                 attendance.attendance_id,
-                MAX(person.company_name) as person_company_name,
-                MAX(person.phone) as person_phone,
                 attendance.description as report,
                 attendance.start_date as start_date,
-                attendance.start_time as start_time,
-                MAX(attendance_event.situation) as situation,
-                MAX(attendance_event.created_at) as event_created_at,
-                MAX(attendance_event.description) as event_description,
-                MAX(user_event.name) as event_user_name')
+                person.company_name as person_company_name,
+                person.phone as person_phone')
             ->join('person', 'attendance.person_id = person.person_id', 'INNER')
             ->join('attendance_reason', 'attendance.person_id = person.person_id', 'INNER')
-            ->join('attendance_event', 'attendance.attendance_id = attendance_event.attendance_id', 'LEFT')
-            ->join('user as user_event', 'attendance_event.user_id = user_event.user_id', 'LEFT')
             ->where('attendance.end_date', null)
             ->where('attendance.user_id', $this->userId)
-            ->groupBy('attendance.attendance_id')
-            ->findAll());
+            ->orderBy('attendance.attendance_id', 'ASC')
+            ->findAll();
+
+        foreach ($attendanceList as $attendance){
+            $attendance->attendance_event = $this->attendanceEventControler->getLast($attendance->attendance_id);
+        }
+
+        return json_encode($attendanceList);
     }
 
     /**

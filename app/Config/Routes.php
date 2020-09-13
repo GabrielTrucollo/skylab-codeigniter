@@ -77,6 +77,16 @@ $routes->get('/payment-type/getAllActive', 'PaymentType::getAllActive', ['filter
 $routes->post('/payment-type/save', 'PaymentType::save', ['filter' => 'auth']);
 $routes->delete('/payment-type/(:num)', 'PaymentType::delete/$1', ['filter' => 'auth']);
 
+
+/**
+ * --------------------------------------------------------------------
+ * Router AttendanceEvent
+ * --------------------------------------------------------------------
+ */
+$routes->get('/attendance-event/(:num)', 'AttendanceEvent::getById/$1', ['filter' => 'auth']);
+$routes->post('/attendance-event/save', 'AttendanceEvent::save', ['filter' => 'auth']);
+$routes->delete('/attendance-event/(:num)', 'AttendanceEvent::delete/$1', ['filter' => 'auth']);
+
 /**
  * --------------------------------------------------------------------
  * Router AttendanceReason
@@ -97,6 +107,7 @@ $routes->delete('/attendance-reason/(:num)', 'AttendanceReason::delete/$1', ['fi
 $routes->get('/attendance-type/', 'AttendanceType::index', ['filter' => 'auth']);
 $routes->get('/attendance-type/(:num)', 'AttendanceType::getById/$1', ['filter' => 'auth']);
 $routes->get('/attendance-type/getAll', 'AttendanceType::getAll', ['filter' => 'auth']);
+$routes->get('/attendance-type/getAllActive', 'AttendanceType::getAllActive', ['filter' => 'auth']);
 $routes->post('/attendance-type/save', 'AttendanceType::save', ['filter' => 'auth']);
 $routes->delete('/attendance-type/(:num)', 'AttendanceType::delete/$1', ['filter' => 'auth']);
 

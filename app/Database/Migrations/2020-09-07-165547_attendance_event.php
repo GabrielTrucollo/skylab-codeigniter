@@ -17,6 +17,15 @@ class AttendanceEvent extends Migration
             'updated_at'       => [
                 'type'           => 'TIMESTAMP',
             ],
+            'start_date'       => [
+                'type'           => 'DATE',
+                'null'           => true
+            ],
+            'start_time'       => [
+                'type'           => 'VARCHAR',
+                'constraint'     => '5',
+                'null'           => true
+            ],
             'end_date'       => [
                 'type'           => 'DATE',
                 'null'           => true

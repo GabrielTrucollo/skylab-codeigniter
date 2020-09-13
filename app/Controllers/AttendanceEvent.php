@@ -41,6 +41,16 @@ class AttendanceEvent extends MainController
             ->findAll();
     }
 
+    public function getLast($attendanceId){
+        return $this->model
+            ->select('attendance_event_id, situation, attendance_event.created_at, user.name as user, description, start_date')
+            ->join('user', 'attendance_event.user_id = user.user_id', 'INNER')
+            ->where('attendance_id', $attendanceId)
+            ->orderBy('attendance_event_id', 'DESC')
+            ->limit('1')
+            ->first();
+    }
+
     /**
      * Save data to database
      */
@@ -61,10 +71,10 @@ class AttendanceEvent extends MainController
         }
 
         $attendanceEvent->fill([
-            'end_date' => $this->request->getVar('end_date'),
-            'end_time' => $this->request->getVar('end_time'),
+            'start_date' => $this->request->getVar('start_date'),
+            'start_time' => $this->request->getVar('start_time'),
             'description' => $this->request->getVar('description'),
-            'user_id' => $this->request->getVar('user_id'),
+            'user_id' => $this->userId,
             'attendance_id' => $this->request->getVar('attendance_id'),
             'attendance_type_id' => $this->request->getVar('attendance_type_id'),
             'situation' => $this->request->getVar('situation')]
