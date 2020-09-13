@@ -37,6 +37,16 @@ class AttendanceReason extends MainController
     }
 
     /**
+     * Get all registers
+     */
+    public function getAllActive(){
+        return json_encode($this->model
+            ->select('attendance_reason_id, description')
+            ->where('status', self::REGISTER_ACTIVED)
+            ->findAll());
+    }
+
+    /**
      * Save data to database
      */
     public function savePartial()

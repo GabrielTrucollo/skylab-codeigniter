@@ -16,6 +16,7 @@ class Attendance extends MainController
     {
         Parent::__construct();
         $this->model = new \App\Models\Attendance();
+        $this->attendanceEventControler = new AttendanceEvent();
     }
 
     /**
@@ -43,20 +44,40 @@ class Attendance extends MainController
                 attendance.attendance_id,
                 MAX(person.company_name) as person_company_name,
                 MAX(person.phone) as person_phone,
-                MAX(attendance.description) as report,
-                MAX(attendance.start_date) as start_date,
+                attendance.description as report,
+                attendance.start_date as start_date,
+                attendance.start_time as start_time,
                 MAX(attendance_event.situation) as situation,
                 MAX(attendance_event.created_at) as event_created_at,
                 MAX(attendance_event.description) as event_description,
                 MAX(user_event.name) as event_user_name')
-            ->join('person', 'attendance.person_id = person.person_id', 'inner')
-            ->join('attendance_reason', 'attendance.person_id = person.person_id', 'inner')
-            ->join('attendance_event', 'attendance.attendance_id = attendance_event.attendance_id', 'left')
-            ->join('user as user_event', 'attendance_event.user_id = user_event.user_id', 'inner')
+            ->join('person', 'attendance.person_id = person.person_id', 'INNER')
+            ->join('attendance_reason', 'attendance.person_id = person.person_id', 'INNER')
+            ->join('attendance_event', 'attendance.attendance_id = attendance_event.attendance_id', 'LEFT')
+            ->join('user as user_event', 'attendance_event.user_id = user_event.user_id', 'LEFT')
             ->where('attendance.end_date', null)
             ->where('attendance.user_id', $this->userId)
             ->groupBy('attendance.attendance_id')
             ->findAll());
+    }
+
+    /**
+     * Get register to database
+     * @param $objectId
+     */
+    public function getById($objectId)
+    {
+        try {
+            $register =  $this->model->find($objectId);
+            if(!$register){
+                return $this->response->setStatusCode('404')->setBody('Registro {'. $objectId .'} não foi localizado!');
+            }
+
+            $register->listEvents = $this->attendanceEventControler->getAll($objectId);
+            return json_encode($register);
+        } catch (Error $error) {
+            return $this->response->setStatusCode('500')->setBody($error->getMessage());
+        }
     }
 
     /**
@@ -79,14 +100,12 @@ class Attendance extends MainController
         }
 
         $attendance->fill([
-            'situation' => $this->request->getVar('situation'),
             'start_date' => $this->request->getVar('start_date'),
-            'end_date' => $this->request->getVar('end_date'),
+            'start_time' => $this->request->getVar('start_time'),
             'description' => $this->request->getVar('description'),
             'person_id' => $this->request->getVar('person_id'),
-            'user_id' => $this->request->getVar('user_id'),
-            'attendance_reason_id' => $this->request->getVar('attendance_reason_id'),
-            'attendance_scheduling_id' => $this->request->getVar('attendance_scheduling_id')]
+            'user_id' => $this->userId,
+            'attendance_reason_id' => $this->request->getVar('attendance_reason_id')]
         );
 
         // Save data

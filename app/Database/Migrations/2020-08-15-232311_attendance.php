@@ -18,11 +18,21 @@ class Attendance extends Migration
                 'type'           => 'TIMESTAMP',
             ],
             'start_date'       => [
-                'type'           => 'TIMESTAMP',
+                'type'           => 'DATE',
+                'null'           => true
+            ],
+            'start_time'       => [
+                'type'           => 'VARCHAR',
+                'constraint'     => '5',
                 'null'           => true
             ],
             'end_date'       => [
-                'type'           => 'TIMESTAMP',
+                'type'           => 'DATE',
+                'null'           => true
+            ],
+            'end_time'       => [
+                'type'           => 'VARCHAR',
+                'constraint'     => '5',
                 'null'           => true
             ],
             'description'       => [

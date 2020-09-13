@@ -39,8 +39,8 @@
                             </td>
                             <td>
                                 <div class="text-center">
-                                <a type="button" class="btn-floating btn-sm btn-amber" ng-click="vm.showEditModal(user)"><i class="far fa-edit"></i></a>
-                                <a type="button" id="remove" class="btn-floating btn-sm btn-danger" ng-click="vm.delete(user)"><i class="fas fa-trash"></i></a>
+                                    <a type="button" class="btn-floating btn-sm btn-amber" ng-click="vm.showEditModal(user)"><i class="far fa-edit"></i></a>
+                                    <a type="button" id="remove" class="btn-floating btn-sm btn-danger" ng-click="vm.delete(user)"><i class="fas fa-trash"></i></a>
                                 </div>
                             </td>
                         </tr>

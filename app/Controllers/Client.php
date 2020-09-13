@@ -40,6 +40,17 @@ class Client extends MainController
     }
 
     /**
+     * Get all actived registers
+     */
+    public function getAllActive(){
+        return json_encode($this->model
+            ->select('person_id, company_name')
+            ->where('flag_client', true)
+            ->where('status', self::REGISTER_ACTIVED)
+            ->findAll());
+    }
+
+    /**
      * Save data to database
      */
     public function savePartial()

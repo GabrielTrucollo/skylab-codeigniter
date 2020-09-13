@@ -51,7 +51,7 @@ $routes->get('/user/', 'User::index', ['filter' => 'auth']);
 $routes->get('/user/(:num)', 'User::getById/$1', ['filter' => 'auth']);
 $routes->get('/user/getAll', 'User::getAll', ['filter' => 'auth']);
 $routes->post('/user/save', 'User::save', ['filter' => 'auth']);
-$routes->delete('/user/(:num)', 'User::delete/$1');
+$routes->delete('/user/(:num)', 'User::delete/$1', ['filter' => 'auth']);
 
 /**
  * --------------------------------------------------------------------
@@ -63,7 +63,7 @@ $routes->get('/software/(:num)', 'Software::getById/$1', ['filter' => 'auth']);
 $routes->get('/software/getAll', 'Software::getAll', ['filter' => 'auth']);
 $routes->get('/software/getAllActive', 'Software::getAllActive', ['filter' => 'auth']);
 $routes->post('/software/save', 'Software::save', ['filter' => 'auth']);
-$routes->delete('/software/(:num)', 'Software::delete/$1');
+$routes->delete('/software/(:num)', 'Software::delete/$1', ['filter' => 'auth']);
 
 /**
  * --------------------------------------------------------------------
@@ -75,7 +75,7 @@ $routes->get('/payment-type/(:num)', 'PaymentType::getById/$1', ['filter' => 'au
 $routes->get('/payment-type/getAll', 'PaymentType::getAll', ['filter' => 'auth']);
 $routes->get('/payment-type/getAllActive', 'PaymentType::getAllActive', ['filter' => 'auth']);
 $routes->post('/payment-type/save', 'PaymentType::save', ['filter' => 'auth']);
-$routes->delete('/payment-type/(:num)', 'PaymentType::delete/$1');
+$routes->delete('/payment-type/(:num)', 'PaymentType::delete/$1', ['filter' => 'auth']);
 
 /**
  * --------------------------------------------------------------------
@@ -85,8 +85,9 @@ $routes->delete('/payment-type/(:num)', 'PaymentType::delete/$1');
 $routes->get('/attendance-reason/', 'AttendanceReason::index', ['filter' => 'auth']);
 $routes->get('/attendance-reason/(:num)', 'AttendanceReason::getById/$1', ['filter' => 'auth']);
 $routes->get('/attendance-reason/getAll', 'AttendanceReason::getAll', ['filter' => 'auth']);
+$routes->get('/attendance-reason/getAllActive', 'AttendanceReason::getAllActive', ['filter' => 'auth']);
 $routes->post('/attendance-reason/save', 'AttendanceReason::save', ['filter' => 'auth']);
-$routes->delete('/attendance-reason/(:num)', 'AttendanceReason::delete/$1');
+$routes->delete('/attendance-reason/(:num)', 'AttendanceReason::delete/$1', ['filter' => 'auth']);
 
 /**
  * --------------------------------------------------------------------
@@ -97,7 +98,7 @@ $routes->get('/attendance-type/', 'AttendanceType::index', ['filter' => 'auth'])
 $routes->get('/attendance-type/(:num)', 'AttendanceType::getById/$1', ['filter' => 'auth']);
 $routes->get('/attendance-type/getAll', 'AttendanceType::getAll', ['filter' => 'auth']);
 $routes->post('/attendance-type/save', 'AttendanceType::save', ['filter' => 'auth']);
-$routes->delete('/attendance-type/(:num)', 'AttendanceType::delete/$1');
+$routes->delete('/attendance-type/(:num)', 'AttendanceType::delete/$1', ['filter' => 'auth']);
 
 /**
  * --------------------------------------------------------------------
@@ -107,8 +108,9 @@ $routes->delete('/attendance-type/(:num)', 'AttendanceType::delete/$1');
 $routes->get('/client/', 'Client::index', ['filter' => 'auth']);
 $routes->get('/client/(:num)', 'Client::getById/$1', ['filter' => 'auth']);
 $routes->get('/client/getAll', 'Client::getAll', ['filter' => 'auth']);
+$routes->get('/client/getAllActive', 'Client::getAllActive', ['filter' => 'auth']);
 $routes->post('/client/save', 'Client::save', ['filter' => 'auth']);
-$routes->delete('/client/(:num)', 'Client::delete/$1');
+$routes->delete('/client/(:num)', 'Client::delete/$1', ['filter' => 'auth']);
 
 /**
  * --------------------------------------------------------------------
@@ -120,7 +122,7 @@ $routes->get('/accounting/(:num)', 'Accounting::getById/$1', ['filter' => 'auth'
 $routes->get('/accounting/getAll', 'Accounting::getAll', ['filter' => 'auth']);
 $routes->get('/accounting/getAllActive', 'Accounting::getAllActive', ['filter' => 'auth']);
 $routes->post('/accounting/save', 'Accounting::save', ['filter' => 'auth']);
-$routes->delete('/accounting/(:num)', 'Accounting::delete/$1');
+$routes->delete('/accounting/(:num)', 'Accounting::delete/$1', ['filter' => 'auth']);
 
 /**
  * --------------------------------------------------------------------
@@ -131,7 +133,7 @@ $routes->get('/attendance/', 'Attendance::index', ['filter' => 'auth']);
 $routes->get('/attendance/(:num)', 'Attendance::getById/$1', ['filter' => 'auth']);
 $routes->get('/attendance/getAll', 'Attendance::getAll', ['filter' => 'auth']);
 $routes->post('/attendance/save', 'Attendance::save', ['filter' => 'auth']);
-$routes->delete('/attendance/(:num)', 'Attendance::delete/$1');
+$routes->delete('/attendance/(:num)', 'Attendance::delete/$1', ['filter' => 'auth']);
 
 /**
  * --------------------------------------------------------------------

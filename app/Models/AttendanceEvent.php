@@ -4,21 +4,21 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Attendance extends Model
+class AttendanceEvent extends Model
 {
     /**
      * Name of database table
      *
      * @var string
      */
-    protected $table = 'attendance';
+    protected $table = 'attendance_event';
 
     /**
      * The table's primary key.
      *
      * @var string
      */
-    protected $primaryKey = 'attendance_id';
+    protected $primaryKey = 'attendance_event_id';
 
     /**
      * An array of field names that are allowed
@@ -27,17 +27,15 @@ class Attendance extends Model
      * @var array
      */
     protected $allowedFields = [
-        'start_date',
-        'start_time',
         'end_date',
         'end_time',
+        'situation',
         'description',
-        'person_id',
         'user_id',
-        'attendance_reason_id',
-        'attendance_scheduling_id'];
+        'attendance_id',
+        'attendance_type_id'];
 
-    protected $returnType = 'App\Entities\Attendance';
+    protected $returnType = 'App\Entities\AttendanceEvent';
 
     /**
      * Indicate if table user default timesatmps

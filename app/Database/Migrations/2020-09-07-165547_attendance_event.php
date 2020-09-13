@@ -18,7 +18,12 @@ class AttendanceEvent extends Migration
                 'type'           => 'TIMESTAMP',
             ],
             'end_date'       => [
-                'type'           => 'TIMESTAMP',
+                'type'           => 'DATE',
+                'null'           => true
+            ],
+            'end_time'       => [
+                'type'           => 'VARCHAR',
+                'constraint'     => '5',
                 'null'           => true
             ],
             'situation'       => [

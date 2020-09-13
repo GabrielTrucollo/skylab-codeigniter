@@ -5,7 +5,8 @@ use CodeIgniter\Entity;
 class Attendance extends Entity
 {
     protected $casts = [
-        'start_date' => '?datetime',
+        'start_date' => '?date',
+        'start_time' => '?time',
         'end_date' => '?datetime',
     ];
 }
