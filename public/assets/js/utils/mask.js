@@ -13,6 +13,8 @@ $(document).ready(function(){
     $('#time').mask('00:00');
     $('#date1').mask('00/00/0000');
     $('#time1').mask('00:00');
+    $('#date2').mask('00/00/0000');
+    $('#time2').mask('00:00');
     $('#date_time').mask('00/00/0000 00:00:00');
     $('#money').mask("#.##0,00");
     $("#address_zipcode").mask("00.000-000");

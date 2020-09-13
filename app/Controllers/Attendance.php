@@ -79,6 +79,65 @@ class Attendance extends MainController
         }
     }
 
+    public function finish(){
+        // Get user id of a request
+        $attendanceId = $this->request->getVar('attendance_id');
+
+        try{
+
+            // Instance of a user from post
+            switch ($attendanceId){
+                case true:
+                    $attendance = $this->model->find($attendanceId);
+                    break;
+
+                default:
+                    throw new \Error('Não foi informado o atendimento a ser finalizado!');
+            }
+
+            $attendance->end_date = $this->request->getVar('end_date');
+            $attendance->end_time = $this->request->getVar('end_time');
+
+            // Save data
+            $this->model->save($attendance);
+
+            $this->sendUserNotification('success', 'Atendimento concluído com sucesso!');
+        }catch (Error $error){
+            $this->sendUserNotification('error', $error->getMessage());
+        } finally {
+            return redirect()->to($this->getIndexRoute());
+        }
+    }
+
+    public function transferUser(){
+        // Get user id of a request
+        $attendanceId = $this->request->getVar('attendance_id');
+
+        try{
+
+            // Instance of a user from post
+            switch ($attendanceId){
+                case true:
+                    $attendance = $this->model->find($attendanceId);
+                    break;
+
+                default:
+                    throw new \Error('Não foi informado o atendimento a ser transferido!');
+            }
+
+            $attendance->user_id = $this->request->getVar('user_id');
+
+            // Save data
+            $this->model->save($attendance);
+
+            $this->sendUserNotification('success', 'Atendimento transferido com sucesso!');
+        }catch (Error $error){
+            $this->sendUserNotification('error', $error->getMessage());
+        } finally {
+            return redirect()->to($this->getIndexRoute());
+        }
+    }
+
     /**
      * Save data to database
      */

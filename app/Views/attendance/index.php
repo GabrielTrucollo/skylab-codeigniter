@@ -190,8 +190,14 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="reset" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                    <button type="submit" class="btn btn-info">Salvar</button>
+                                    <div class="text-left">
+                                        <button type="button" class="btn btn-dark" ng-click="vm.showTransferModal(vm.attendance)"><i></i>Transferir</button>
+                                        <button type="button" class="btn btn-indigo" ng-click="vm.showFinishModal(vm.attendance)"><i></i>Concluir</button>
+                                    </div>
+                                    <div class="text-right">
+                                        <button type="reset" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-info">Salvar</button>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -267,6 +273,74 @@
             </div>
         </div>
 
+        <!-- Form finish attendance modal -->
+        <div class="modal fade" id="formFinishAttendance" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog cascading-modal modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header info-color-dark text-white">
+                        <h5 class="heading lead"><i class="fas fa-clipboard-list"></i> Conclusão de Atendimento</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="white-text">&times;</span>
+                        </button>
+                    </div>
+                    <form method="post" action="<?= base_url('attendance/finish')?>">
+                        <div class="modal-body">
+                            <input type="text" id="attendance_id_finish" name="attendance_id" class="form-control" readonly hidden value="{{vm.attendanceFinish.attendance_id}}">
+                            <div class="row">
+                                <div class="md-form col-sm-4 md-outline">
+                                    <input type="text" id="date2" name="end_date" class="form-control" value="{{vm.attendanceFinish.end_date}}" required>
+                                    <label for="start_date">Data</label>
+                                </div>
+                                <div class="md-form col-sm-2 md-outline">
+                                    <input type="text" id="time2" name="end_time" class="form-control" value="{{vm.attendanceFinish.end_time}}" required>
+                                    <label for="start_date">Hora</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-info">Concluir</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form transfer user attendance modal -->
+        <div class="modal fade" id="formTransferAttendance" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog cascading-modal modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header info-color-dark text-white">
+                        <h5 class="heading lead"><i class="fas fa-clipboard-list"></i> Transferir Atendimento</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="white-text">&times;</span>
+                        </button>
+                    </div>
+                    <form method="post" action="<?= base_url('attendance/transferUser')?>">
+                        <div class="modal-body">
+                            <input type="text" id="attendance_id_transfer" name="attendance_id" class="form-control" readonly hidden value="{{vm.attendanceTransfer.attendance_id}}">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <select name="user_id" id="user_id" class="select-wrapper mdb-select colorful-select dropdown-primary md-form" searchable="Pesquisar...">
+                                        <option value="" disabled selected>Pesquisa de Usuário</option>
+                                        <option
+                                                ng-repeat="user in vm.users track by user.user_id"
+                                                value="{{user.user_id}}">{{user.name}}
+                                        </option>
+                                    </select>
+                                    <label class="mdb-main-label">Usuário</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-info">Transferir</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
     </div>
     <!-- Scripts -->
     <script type="text/javascript" src="<?= base_url('assets/js/angular.min.js'); ?>"></script>
@@ -316,6 +390,16 @@
                 $http.get('<?= base_url('client/getAllActive') ?>')
                     .then(function(response){
                         vm.clients = response.data;
+                    })
+                    .catch(function(error){
+                        toastr.error(error);
+                    });
+            }
+
+            vm.getUsers = () => {
+                $http.get('<?= base_url('user/getAllActive') ?>')
+                    .then(function(response){
+                        vm.users = response.data;
                     })
                     .catch(function(error){
                         toastr.error(error);
@@ -391,6 +475,17 @@
                 $('#formEventModal').modal('show');
             }
 
+            vm.showFinishModal = (register) => {
+                vm.attendanceFinish =
+                    {
+                        attendance_id: register.attendance_id,
+                        end_date: moment(new Date()).format('DD/MM/yyyy'),
+                        end_time: moment(new Date()).format('HH:mm'),
+                    };
+
+                $('#formFinishAttendance').modal('show');
+            }
+
             vm.showNewModal = () => {
                 vm.attendance =
                     {
@@ -403,11 +498,29 @@
                 $('#formModal').modal('show');
             }
 
+            vm.showTransferModal = (register) => {
+                vm.attendanceTransfer = {
+                    attendance_id: register.attendance_id,
+                }
+
+                $('#formTransferAttendance').modal('show');
+            }
+
             vm.delete = (register) => {
                 $http.delete('<?= base_url('attendance') ?>/' + register.attendance_id)
                     .then(function(response){
                         toastr.success('Registro excluído com sucesso!');
-                        vm.getAll();
+                    })
+                    .catch(function(error){
+                        toastr.error(error.data);
+                    });
+            }
+
+            vm.deleteEvent = (register) => {
+                $http.delete('<?= base_url('attendance-event') ?>/' + register.attendance_event_id)
+                    .then(function(response){
+                        toastr.success('Registro excluído com sucesso!');
+                        $('#formModal').modal('hide');
                     })
                     .catch(function(error){
                         toastr.error(error.data);
@@ -422,6 +535,7 @@
             ];
 
             vm.getAttendancesType();
+            vm.getUsers();
             vm.getAll();
         });
     </script>

@@ -36,6 +36,13 @@ class User extends MainController
     }
 
     /**
+     * Get all registers
+     */
+    public function getAllActive(){
+        return json_encode($this->model->select('user_id, name')->findAll());
+    }
+
+    /**
      * Save data to database
      */
     public function savePartial()
