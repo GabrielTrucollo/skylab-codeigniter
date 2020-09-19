@@ -42,12 +42,12 @@ class Attendance extends MainController
         $attendanceList = $this->model
             ->select('
                 attendance.attendance_id,
-                attendance.description as report,
                 attendance.start_date as start_date,
+                attendance.description as report,
                 person.company_name as person_company_name,
                 person.phone as person_phone')
             ->join('person', 'attendance.person_id = person.person_id', 'INNER')
-            ->join('attendance_reason', 'attendance.person_id = person.person_id', 'INNER')
+            ->join('attendance_reason', 'attendance_reason.attendance_reason_id = attendance.attendance_reason_id', 'INNER')
             ->where('attendance.end_date', null)
             ->where('attendance.user_id', $this->userId)
             ->orderBy('attendance.attendance_id', 'ASC')
