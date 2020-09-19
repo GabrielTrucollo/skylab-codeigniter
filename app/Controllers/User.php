@@ -144,6 +144,7 @@ class User extends MainController
             'user_id' => $user->user_id,
             'doc_cpf' => $user->doc_cpf,
             'name' => $user->name,
+            'administrator' => $user->user_administrator == 1,
             'logged_in' => true,
         ]);
 
@@ -189,6 +190,7 @@ class User extends MainController
         session()->set([
             'user_id' => $user->user_id,
             'doc_cpf' => $user->doc_cpf,
+            'administrator' => $user->user_administrator == 1,
             'name' => $user->name,
             'logged_in' => true,
         ]);
@@ -205,7 +207,7 @@ class User extends MainController
      /**
      * get user by doc_cpf
      * @param string $cpf cpf of a user
-     * @return object
+     * @return object User
      */
     private function getUserByCpf(string $cpf) : \App\Entities\User
     {

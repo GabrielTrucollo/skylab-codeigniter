@@ -23,11 +23,17 @@ abstract class MainController extends BaseController
     protected $userId;
 
     /**
+     * @var userId
+     */
+    protected $userAdministrator;
+
+    /**
      * MainController constructor.
      */
     public function __construct()
     {
         $this->userId = session()->get('user_id');
+        $this->userAdministrator = session()->get('administrator');
     }
 
     /**

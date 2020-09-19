@@ -39,7 +39,7 @@ class Attendance extends MainController
      * Get all registers
      */
     public function getAll(){
-        $attendanceList = $this->model
+        $query =  $this->model
             ->select('
                 attendance.attendance_id,
                 attendance.start_date as start_date,
@@ -48,15 +48,28 @@ class Attendance extends MainController
                 person.phone as person_phone')
             ->join('person', 'attendance.person_id = person.person_id', 'INNER')
             ->join('attendance_reason', 'attendance_reason.attendance_reason_id = attendance.attendance_reason_id', 'INNER')
-            ->where('attendance.end_date', null)
-            ->where('attendance.user_id', $this->userId)
-            ->orderBy('attendance.attendance_id', 'ASC')
-            ->findAll();
+            ->where('end_date', null)
+            ->orderBy('attendance.attendance_id', 'ASC');
 
+        // Filter with a user
+        switch ($this->userAdministrator){
+            case true:
+                break;
+
+            default:
+                $query->where('attendance.user_id', $this->userId);
+                break;
+        }
+
+        // Execute query
+        $attendanceList = $query->findAll();
+
+        // Get last event of a attendance
         foreach ($attendanceList as $attendance){
             $attendance->attendance_event = $this->attendanceEventControler->getLast($attendance->attendance_id);
         }
 
+        // Return
         return json_encode($attendanceList);
     }
 
