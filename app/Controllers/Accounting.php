@@ -69,7 +69,7 @@ class Accounting extends MainController
                 $person = new \App\Entities\Accounting();
                 break;
         }
-
+        
         $person->fill([
             'status' => $this->request->getVar('status'),
             'company_name' => $this->request->getVar('company_name'),

@@ -534,6 +534,10 @@
                 {value: 99, description: 'Concluído'}
             ];
 
+            $(document).on('shown.bs.modal', function (e) {
+                $('#person_id').focus()
+            });
+
             vm.getAttendancesType();
             vm.getUsers();
             vm.getAll();

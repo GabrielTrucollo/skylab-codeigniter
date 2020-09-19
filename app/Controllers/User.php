@@ -148,7 +148,7 @@ class User extends MainController
         ]);
 
         $this->sendUserNotification('info', 'Bem vindo, desejamos um ótimo dia!');
-        return redirect('/skylab');
+        return redirect()->to(base_url());
     }
 
     /**
@@ -194,12 +194,12 @@ class User extends MainController
         ]);
 
         $this->sendUserNotification('success', 'Bem vindo, guarde sua senha ela será solicitada nos proximos acessos');
-        return redirect()->to('/skylab');
+        return redirect()->to(base_url());
     }
 
     public function logOut(){
         session()->destroy();
-        return redirect()->to('/skylab');
+        return redirect()->to(base_url());
     }
 
      /**

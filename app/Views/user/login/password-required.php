@@ -37,7 +37,7 @@
                                     <button class="btn blue-gradient btn-lg">Acessar <i class="fas fa-arrow-right prefix white-text"></i></button>
                                 </div>
                                 <div class="text-center">
-                                    <button class="btn peach-gradient btn-lg"><i class="fas fa-arrow-left prefix white-text"></i> Voltar</button>
+                                    <a class="btn peach-gradient btn-lg" href="<?= base_url(); ?>"><i class="fas fa-arrow-left prefix white-text"></i> Voltar</a>
                                 </div>
                             </div>
                         </div>
