@@ -56,7 +56,7 @@ abstract class MainController extends BaseController
             $register =  $this->model->find($objectId);
             if(!$register){
                 return $this->response->setStatusCode('404')->setBody('Registro {'. $objectId .'} não foi localizado!');
-           }
+            }
 
             return json_encode($register);
         } catch (Error $error) {

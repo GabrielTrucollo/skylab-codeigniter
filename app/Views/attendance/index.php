@@ -258,7 +258,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="md-form md-outline">
-                                        <textarea type="text" id="description_event" name="description" class="md-textarea form-control" rows="3" cols="3" required>{{vm.attendanceEvent.description}}</textarea>
+                                        <textarea type="text" id="description_event" name="reason" class="md-textarea form-control" rows="3" cols="3" required>{{vm.attendanceEvent.description}}</textarea>
                                         <label for="description_event">Descrição</label>
                                     </div>
                                 </div>

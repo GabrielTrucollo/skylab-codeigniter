@@ -114,6 +114,18 @@ $routes->delete('/attendance-type/(:num)', 'AttendanceType::delete/$1', ['filter
 
 /**
  * --------------------------------------------------------------------
+ * Router AttendanceScheduling
+ * --------------------------------------------------------------------
+ */
+$routes->get('/attendance-scheduling/', 'AttendanceScheduling::index', ['filter' => 'auth']);
+$routes->get('/attendance-scheduling/new', 'AttendanceScheduling::getNewRegister', ['filter' => 'auth']);
+$routes->get('/attendance-scheduling/(:num)', 'AttendanceScheduling::getById/$1', ['filter' => 'auth']);
+$routes->get('/attendance-scheduling/getAll', 'AttendanceScheduling::getAll', ['filter' => 'auth']);
+$routes->post('/attendance-scheduling/save', 'AttendanceScheduling::save', ['filter' => 'auth']);
+$routes->delete('/attendance-scheduling/(:num)', 'AttendanceScheduling::delete/$1', ['filter' => 'auth']);
+
+/**
+ * --------------------------------------------------------------------
  * Router Client
  * --------------------------------------------------------------------
  */
