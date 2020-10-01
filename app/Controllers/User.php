@@ -137,7 +137,7 @@ class User extends MainController
         if(!password_verify($this->request->getVar('password'), $user->password))
         {
             $this->sendUserNotification('error', 'Senha informada está incorreta!');
-            return redirect()->to('user/login/password-required');
+            return redirect()->to('/user/login/password-required');
         }
 
         session()->set([
