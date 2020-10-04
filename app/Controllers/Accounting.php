@@ -41,7 +41,7 @@ class Accounting extends MainController
 
 
     /**
-     * Get all actived registers
+     * Get all active registers
      */
     public function getAllActive(){
         return json_encode($this->model

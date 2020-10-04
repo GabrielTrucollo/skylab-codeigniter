@@ -138,6 +138,17 @@ $routes->delete('/client/(:num)', 'Client::delete/$1', ['filter' => 'auth']);
 
 /**
  * --------------------------------------------------------------------
+ * Router Client-Software-Update
+ * --------------------------------------------------------------------
+ */
+$routes->get('/client-software-update/', 'ClientSoftwareUpdate::index', ['filter' => 'auth']);
+$routes->get('/client-software-update/(:num)', 'ClientSoftwareUpdate::getById/$1', ['filter' => 'auth']);
+$routes->get('/client-software-update/getAll', 'ClientSoftwareUpdate::getAll', ['filter' => 'auth']);
+$routes->post('/client-software-update/save', 'ClientSoftwareUpdate::save', ['filter' => 'auth']);
+$routes->delete('/client-software-update/(:num)', 'ClientSoftwareUpdate::delete/$1', ['filter' => 'auth']);
+
+/**
+ * --------------------------------------------------------------------
  * Router Accounting
  * --------------------------------------------------------------------
  */

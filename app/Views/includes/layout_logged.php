@@ -62,6 +62,9 @@
                                     <a href="<?= base_url('attendance-scheduling/') ?>" class="waves-effect"><i class="w-fa fas fa-calendar-alt"></i> Agendamentos</a>
                                 </li>
                                 <li>
+                                    <a href="<?= base_url('client-software-update/') ?>" class="waves-effect"><i class="w-fa fas fa-sync-alt"></i> Atualizações</a>
+                                </li>
+                                <li>
                                     <a href="<?= base_url('attendance-reason/') ?>" class="waves-effect"><i class="w-fa fas fa-book"></i> Motivos</a>
                                 </li>
                                 <li>

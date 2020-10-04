@@ -47,6 +47,14 @@ abstract class MainController extends BaseController
     abstract public function getIndexRoute(): string;
 
     /**
+     * Get all registers active
+     * @return string json
+     */
+    public function getAllActive(){
+        return $this->response->setStatusCode('404')->setBody('Atenção!! A chamada do método "getAllActive" não foi implementada. Erro de Desenvolvimento!');
+    }
+
+    /**
      * Get register to database
      * @param $objectId
      */
@@ -55,7 +63,7 @@ abstract class MainController extends BaseController
         try {
             $register =  $this->model->find($objectId);
             if(!$register){
-                return $this->response->setStatusCode('404')->setBody('Registro {'. $objectId .'} não foi localizado!');
+                return $this->response->setStatusCode('404')->setBody('Registro '. $objectId .' não foi localizado!');
             }
 
             return json_encode($register);
@@ -77,10 +85,10 @@ abstract class MainController extends BaseController
             $this->sendUserNotification('success', "Registro salvo com sucesso");
         } catch (Error $error) {
             // Send user message
-            $this->sendUserNotification('error', "Ocorreu um erro salvar o registro: {" . $error->getMessage() . "}");
+            $this->sendUserNotification('error', "Ocorreu um erro salvar o registro: " . $error->getMessage() . "");
         } catch (\ReflectionException $e) {
             // Send user message
-            $this->sendUserNotification('error', "Ocorreu um erro salvar o registro (Reflection): {" . $e->getMessage() . "}");
+            $this->sendUserNotification('error', "Ocorreu um erro salvar o registro (Reflection): " . $e->getMessage() . "");
         } finally {
             return redirect()->to($this->getIndexRoute());
         }

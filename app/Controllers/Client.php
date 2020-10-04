@@ -44,7 +44,7 @@ class Client extends MainController
      */
     public function getAllActive(){
         return json_encode($this->model
-            ->select('person_id, company_name')
+            ->select('person_id, company_name, software_id')
             ->where('flag_client', true)
             ->where('status', self::REGISTER_ACTIVED)
             ->findAll());
