@@ -41,9 +41,11 @@ class ClientSoftwareUpdate extends MainController
                 MAX(version) as version,
                 MAX(person.company_name) as client,
                 MAX(software.name) as software,
-                MAX(person_software_update.created_at) as date')
+                MAX(person_software_update.created_at) as date,
+                MAX("user".name) as user_name')
             ->join('person', 'person_software_update.person_id = person.person_id', 'INNER')
             ->join('software', 'person_software_update.software_id = software.software_id', 'INNER')
+            ->join('"user"', 'person_software_update.user_id = "user".user_id', 'INNER')
             ->groupBy('person_software_update.person_id')
             ->findAll());
     }

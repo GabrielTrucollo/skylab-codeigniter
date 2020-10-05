@@ -20,19 +20,21 @@
                         <table id="main-table" class="table table-hover table-striped table-bordered" cellspacing="0">
                             <thead>
                             <tr>
-                                <th width="80px">Sequencial</th>
                                 <th>Cliente</th>
-                                <th width="300px">Software</th>
-                                <th width="120px">Versão</th>
+                                <th width="250px">Usuário</th>
+                                <th width="200px">Software</th>
+                                <th width="200px">Versão</th>
+                                <th width="120px">Data</th>
                                 <th width="120px" class="text-center">Ações</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr ng-repeat="softwareUpdate in vm.clientSoftwareUpdates | filter:vm.search">
-                                <td>{{ softwareUpdate.person_software_update_id }}</td>
                                 <td>{{ softwareUpdate.client }}</td>
+                                <td>{{ softwareUpdate.user_name }}</td>
                                 <td>{{ softwareUpdate.software }}</td>
                                 <td>{{ softwareUpdate.version }}</td>
+                                <td>{{ vm.getFormatDate(softwareUpdate.date) }}</td>
                                 <td>
                                     <div class="text-center">
                                         <a type="button" class="btn-floating btn-sm btn-amber" ng-click="vm.showEditModal(softwareUpdate)"><i class="far fa-edit"></i></a>
@@ -186,6 +188,14 @@
                     .catch(function(error){
                         toastr.error(error);
                     });
+            }
+
+            vm.getFormatDate = (date) => {
+                if(!date){
+                    return 'Sem Eventos';
+                }
+
+                return moment(date).format('DD/MM/yyyy');
             }
 
             $(document).on('shown.bs.modal', function (e) {
