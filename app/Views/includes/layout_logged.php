@@ -5,7 +5,7 @@
 <!-- Main Navigation -->
 <header>
     <!-- Sidebar navigation -->
-    <div id="slide-out" class="side-nav sn-bg-4 fixed">
+    <div id="slide-out" class="side-nav side wide sn-bg-4 fixed">
         <ul class="custom-scrollbar">
             <!-- Logo -->
             <li class="logo-sn waves-effect py-3">
@@ -16,6 +16,10 @@
             <!-- Side navigation links -->
             <li>
                 <ul class="collapsible collapsible-accordion">
+                    <!-- Dashboard -->
+                    <li>
+                        <a href="<?= base_url('/') ?>" class="waves-effect"><i class="w-fa fas fa-tachometer-alt"></i> Dashboard</a>
+                    </li>
                     <!-- Cadastros -->
                     <li>
                         <a class="collapsible-header waves-effect arrow-r">

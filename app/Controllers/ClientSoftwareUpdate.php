@@ -28,7 +28,7 @@ class ClientSoftwareUpdate extends MainController
      */
     public function index(): void
     {
-        echo view('client_software_update/index');
+        echo view('person/client/software_update/index');
     }
 
     /**
